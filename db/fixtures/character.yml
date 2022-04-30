@@ -1,0 +1,12 @@
+- id: 1
+  title: ヒポグリフ
+  description: 通常出せるカードは、rock(グー)、scissors（チョキ）のみ。
+  card_image:
+- id: 2
+  title: ユバの民
+  description: 通常出せるカードは、scissors（チョキ）、paper（パー）のみ。
+  card_image:
+- id: 3
+  title: カーバンクル
+  description: 通常出せるカードは、paper（パー）、rock(グー)のみ。
+  card_image:
