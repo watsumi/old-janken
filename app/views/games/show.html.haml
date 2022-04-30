@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Host:
+  = @game.user
+%p
+  %b Guest:
+  = @game&.guest
+%p
+  %b Field:
+  = @game.field
+
+= link_to 'Edit', edit_game_path(@game)
+\|
+= link_to 'Back', games_path

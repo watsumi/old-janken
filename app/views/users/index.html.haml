@@ -1,0 +1,7 @@
+%h1 Listing users
+#users
+  - @users.each do |user|
+    = render 'user', user: user
+
+
+= link_to 'New User', new_user_path
