@@ -2,7 +2,7 @@
 #
 # Table name: game_details
 #
-#  id            :bigint           not null, primary key
+#  id            :uuid             not null, primary key
 #  hand_1        :integer          default(0), not null
 #  hand_2        :integer          default(0), not null
 #  hand_3        :integer          default(0), not null

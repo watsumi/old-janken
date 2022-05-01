@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_030121) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "game_details", force: :cascade do |t|
+  create_table "game_details", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "game_id", null: false
     t.integer "hand_1", default: 0, null: false
     t.integer "hand_2", default: 0, null: false
@@ -30,17 +30,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_030121) do
   end
 
   create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "uuid", null: false
     t.integer "guest_id"
     t.integer "field_id", default: 1, null: false
-    t.bigint "users_id", null: false
+    t.uuid "users_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["users_id"], name: "index_games_on_users_id"
-    t.index ["uuid"], name: "index_games_on_uuid"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nickname", default: "", null: false
     t.string "uuid_digest", default: "", null: false
     t.integer "character_id", default: 1, null: false

@@ -1,7 +1,7 @@
 class CreateGameDetails < ActiveRecord::Migration[7.0]
   def change
-    create_table :game_details do |t|
-      t.references :game, null: false, foreign_key: true, type: :uuid
+    create_table :game_details, id: :uuid do |t|
+      t.references :game, type: :uuid, null: false, foreign_key: true
       t.integer :hand_1, null: false, default: 0
       t.integer :hand_2, null: false, default: 0
       t.integer :hand_3, null: false, default: 0

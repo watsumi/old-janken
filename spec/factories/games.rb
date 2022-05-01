@@ -3,17 +3,15 @@
 # Table name: games
 #
 #  id         :uuid             not null, primary key
-#  uuid       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  field_id   :integer          default(1), not null
 #  guest_id   :integer
-#  users_id   :bigint           not null
+#  users_id   :uuid             not null
 #
 # Indexes
 #
 #  index_games_on_users_id  (users_id)
-#  index_games_on_uuid      (uuid)
 #
 # Foreign Keys
 #
