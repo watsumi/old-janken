@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_030121) do
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nickname", default: "", null: false
-    t.string "uuid_digest", default: "", null: false
+    t.string "user_token_digest", default: "", null: false
     t.integer "character_id", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
