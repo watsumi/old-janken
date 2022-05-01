@@ -33,7 +33,7 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'brakeman' # 脆弱性診断 breakman で実行
+  gem 'brakeman' # 脆弱性診断 brakeman で実行
   gem 'rails_best_practices', require: false # bundle exec rails_best_practices で実行
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
