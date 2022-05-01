@@ -19,5 +19,8 @@
 #
 #  fk_rails_...  (users_id => users.id)
 #
-class Game < ApplicationRecord
+require 'rails_helper'
+
+RSpec.describe Game, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -1,4 +1,5 @@
-.mx-auto.w-full{:class => "md:w-2/3"}
-  %h1.font-bold.text-4xl New game
-  = render "form", game: @game
-  = link_to 'Back to games', games_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+%h1 New game
+
+= render 'form'
+
+= link_to 'Back', games_path
