@@ -13,13 +13,18 @@ development: &development
 
 test:
   <<: *default
-  database: old_janken_test
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  pool: <%= ENV['MAX_CONNECTION_POOL'] || 5 %>
 
 production:
   <<: *default
-  database: <%= ENV['DB_NAME'] %>
-  username: <%= ENV['USERNAME'] %>
-  password: <%= ENV['PASSWORD'] %>
-  host: <%= ENV['HOSTNAME'] %>
-  port: <%= ENV['PORT'] %>
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
   pool: <%= ENV['MAX_CONNECTION_POOL'] || 5 %>
