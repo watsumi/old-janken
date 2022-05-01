@@ -1,25 +1,6 @@
 %h1 Listing games
-
-%table
-  %thead
-    %tr
-      %th Uuid
-      %th Host
-      %th Guest
-      %th Field
-      %th
-      %th
-      %th
-
-  %tbody
-    - @games.each do |game|
-      %tr
-        %td= game.guest_id
-        %td= game.field_id
-        %td= link_to 'Show', game
-        %td= link_to 'Edit', edit_game_path(game)
-        %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
+#users
+  - @games.each do |game|
+    = render 'game', game: game
 
 = link_to 'New Game', new_game_path

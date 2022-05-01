@@ -1,25 +1,7 @@
 %h1 Listing users
+#users
+  - @users.each do |user|
+    = render 'user', user: user
 
-%table
-  %thead
-    %tr
-      %th Nickname
-      %th Status
-      %th Uuid digest
-      %th Character
-      %th
-      %th
-      %th
-
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.nickname
-        %td= user.character_id
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
 
 = link_to 'New User', new_user_path
