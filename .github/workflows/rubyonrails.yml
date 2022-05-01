@@ -21,9 +21,12 @@ jobs:
       image: ruby:3.1.0
       env:
         RAILS_ENV: test
-        POSTGRES_HOST: postgres
-        RAILS_DATABASE_USER: postgres
-        RAILS_DATABASE_PASSWORD: password
+        BUNDLE_PATH: ./vendor/bundle
+        DATABASE_NAME: old_janken_test
+        DATABASE_USER: postgres
+        DATABASE_PASSWORD: ""
+        DATABASE_HOST: 127.0.0.1
+        DATABASE_PORT: 5432
         REDIS_URL: redis://redis:6379/1
 
     steps:
