@@ -9,5 +9,11 @@
 #  updated_at   :datetime         not null
 #  character_id :integer          default(1), not null
 #
-class User < ApplicationRecord
+FactoryBot.define do
+  factory :user do
+    nickname { "MyString" }
+    status { 1 }
+    uuid_digest { "MyString" }
+    character_id { 1 }
+  end
 end

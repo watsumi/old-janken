@@ -9,5 +9,8 @@
 #  updated_at   :datetime         not null
 #  character_id :integer          default(1), not null
 #
-class User < ApplicationRecord
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
