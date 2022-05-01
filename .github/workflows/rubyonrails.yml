@@ -3,7 +3,7 @@ on: [push]
 jobs:
   run:
     runs-on: ubuntu-latest
-
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
     services:
       postgres:
         image: postgres:14
@@ -11,8 +11,8 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: test
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: old_janken_test
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
       redis:
         image: redis:alpine
@@ -67,12 +67,14 @@ jobs:
         run: bundle install --path=vendor/bundle --jobs 4 --retry 3
       - name: Yarn install
         run: bundle exec rails yarn:install
-      - name: Database Migration
+      - name: Set env
+        run: |
+          echo '::set-env name=RAILS_ENV::test'
+          echo '::set-env name=DATABASE_URL::postgres://postgres:postgres@localhost:5432/old_janken_test'
+      - name: setup DB
         run: |
           cp config/database.example.yml config/database.yml
-          bundle exec rails db:drop
-          bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:migrate RAILS_ENV=test
+          bundle exec rails db:schema:load
       - name: Run brakeman
         run: brakeman
       - name: Run rails_best_practices
