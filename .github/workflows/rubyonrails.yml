@@ -67,10 +67,6 @@ jobs:
         run: bundle install --path=vendor/bundle --jobs 4 --retry 3
       - name: Yarn install
         run: bundle exec rails yarn:install
-      - name: Set env
-        run: |
-          echo '::set-env name=RAILS_ENV::test'
-          echo '::set-env name=DATABASE_URL::postgres://postgres:postgres@localhost:5432/old_janken_test'
       - name: setup DB
         run: |
           cp config/database.example.yml config/database.yml
