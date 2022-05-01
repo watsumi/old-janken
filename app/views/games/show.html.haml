@@ -1,17 +1,14 @@
 %p#notice= notice
 
 %p
-  %b Uuid:
-  = @game.uuid
-%p
   %b Host:
-  = @game.host_id
+  = @game.user
 %p
   %b Guest:
-  = @game.guest_id
+  = @game&.guest
 %p
   %b Field:
-  = @game.field_id
+  = @game.field
 
 = link_to 'Edit', edit_game_path(@game)
 \|

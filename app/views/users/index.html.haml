@@ -15,8 +15,6 @@
     - @users.each do |user|
       %tr
         %td= user.nickname
-        %td= user.status
-        %td= user.uuid_digest
         %td= user.character_id
         %td= link_to 'Show', user
         %td= link_to 'Edit', edit_user_path(user)

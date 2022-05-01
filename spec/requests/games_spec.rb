@@ -12,69 +12,68 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/games", type: :request do
-  
+RSpec.describe '/games', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Game. As you add validations to Game, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    skip('Add a hash of attributes valid for your model')
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) do
+    skip('Add a hash of attributes invalid for your model')
+  end
 
-  describe "GET /index" do
-    it "renders a successful response" do
+  describe 'GET /index' do
+    it 'renders a successful response' do
       Game.create! valid_attributes
       get games_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
+  describe 'GET /show' do
+    it 'renders a successful response' do
       game = Game.create! valid_attributes
       get game_url(game)
       expect(response).to be_successful
     end
   end
 
-  describe "GET /new" do
-    it "renders a successful response" do
+  describe 'GET /new' do
+    it 'renders a successful response' do
       get new_game_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
+  describe 'GET /edit' do
+    it 'renders a successful response' do
       game = Game.create! valid_attributes
       get edit_game_url(game)
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Game" do
-        expect {
+  describe 'POST /create' do
+    context 'with valid parameters' do
+      it 'creates a new Game' do
+        expect do
           post games_url, params: { game: valid_attributes }
-        }.to change(Game, :count).by(1)
+        end.to change(Game, :count).by(1)
       end
 
-      it "redirects to the created game" do
+      it 'redirects to the created game' do
         post games_url, params: { game: valid_attributes }
         expect(response).to redirect_to(game_url(Game.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Game" do
-        expect {
+    context 'with invalid parameters' do
+      it 'does not create a new Game' do
+        expect do
           post games_url, params: { game: invalid_attributes }
-        }.to change(Game, :count).by(0)
+        end.to change(Game, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
@@ -84,20 +83,20 @@ RSpec.describe "/games", type: :request do
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe 'PATCH /update' do
+    context 'with valid parameters' do
+      let(:new_attributes) do
+        skip('Add a hash of attributes valid for your model')
+      end
 
-      it "updates the requested game" do
+      it 'updates the requested game' do
         game = Game.create! valid_attributes
         patch game_url(game), params: { game: new_attributes }
         game.reload
-        skip("Add assertions for updated state")
+        skip('Add assertions for updated state')
       end
 
-      it "redirects to the game" do
+      it 'redirects to the game' do
         game = Game.create! valid_attributes
         patch game_url(game), params: { game: new_attributes }
         game.reload
@@ -105,7 +104,7 @@ RSpec.describe "/games", type: :request do
       end
     end
 
-    context "with invalid parameters" do
+    context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         game = Game.create! valid_attributes
         patch game_url(game), params: { game: invalid_attributes }
@@ -114,15 +113,15 @@ RSpec.describe "/games", type: :request do
     end
   end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested game" do
+  describe 'DELETE /destroy' do
+    it 'destroys the requested game' do
       game = Game.create! valid_attributes
-      expect {
+      expect do
         delete game_url(game)
-      }.to change(Game, :count).by(-1)
+      end.to change(Game, :count).by(-1)
     end
 
-    it "redirects to the games list" do
+    it 'redirects to the games list' do
       game = Game.create! valid_attributes
       delete game_url(game)
       expect(response).to redirect_to(games_url)

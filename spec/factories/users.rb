@@ -11,9 +11,9 @@
 #
 FactoryBot.define do
   factory :user do
-    nickname { "MyString" }
+    nickname { 'MyString' }
     status { 1 }
-    uuid_digest { "MyString" }
+    uuid_digest { 'MyString' }
     character_id { 1 }
   end
 end

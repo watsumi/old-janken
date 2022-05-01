@@ -21,7 +21,7 @@
 #
 FactoryBot.define do
   factory :game do
-    uuid { "MyString" }
+    uuid { 'MyString' }
     host_id { 1 }
     guest_id { 1 }
     field_id { 1 }
