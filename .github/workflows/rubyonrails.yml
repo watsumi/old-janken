@@ -70,7 +70,9 @@ jobs:
       - name: setup DB
         run: |
           cp config/database.example.yml config/database.yml
-          bundle exec rails db:schema:load
+          bundle exec rails db:drop
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
       - name: Run brakeman
         run: brakeman
       - name: Run rails_best_practices
