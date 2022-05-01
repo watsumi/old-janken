@@ -22,11 +22,6 @@ jobs:
       env:
         RAILS_ENV: test
         BUNDLE_PATH: ./vendor/bundle
-        DATABASE_NAME: old_janken_test
-        DATABASE_USER: postgres
-        DATABASE_PASSWORD: ""
-        DATABASE_HOST: localhost
-        DATABASE_PORT: 5432
         REDIS_URL: redis://redis:6379/1
 
     steps:
@@ -67,12 +62,10 @@ jobs:
         run: bundle install --path=vendor/bundle --jobs 4 --retry 3
       - name: Yarn install
         run: bundle exec rails yarn:install
-      - name: setup DB
-        run: |
-          cp config/database.example.yml config/database.yml
-          bundle exec rails db:drop
-          bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:migrate RAILS_ENV=test
+      - name: Set database.yml
+        run: cp -v config/database.example.yml config/database.yml
+      - name: db create
+        run: bundle exec rails db:create db:schema:load --trace
       - name: Run brakeman
         run: brakeman
       - name: Run rails_best_practices
