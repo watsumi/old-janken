@@ -22,7 +22,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
 
     if @game.save
-      redirect_to @game, notice: 'Game was successfully created.'
+      redirect_to @game, notice: t('.success')
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   def update
     if @game.update(game_params)
-      redirect_to @game, notice: 'Game was successfully updated.'
+      redirect_to @game, notice: t('.success')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class GamesController < ApplicationController
   # DELETE /games/1
   def destroy
     @game.destroy
-    redirect_to games_url, notice: 'Game was successfully destroyed.'
+    redirect_to games_url, notice: t('.success')
   end
 
   private
@@ -52,6 +52,6 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:field_id)
+    params.require(:game).permit(:uuid, :host_id, :guest_id, :field_id)
   end
 end

@@ -1,8 +1,6 @@
-%div{:id => "#{dom_id game}"}
-  %p.my-5
-    %strong.block.font-medium.mb-1 Field:
-    = game.field_id
-  - if action_name != "show"
-    = link_to "Show this game", game, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
-    = link_to 'Edit this game', edit_game_path(game), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
-    %hr.mt-6/
+%div
+  = game.guest_id
+  = game.field_id
+  = link_to 'Show', game
+  = link_to 'Edit', edit_game_path(game)
+  = link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }

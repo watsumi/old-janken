@@ -17,5 +17,11 @@
 #
 #  fk_rails_...  (users_id => users.id)
 #
-class Game < ApplicationRecord
+FactoryBot.define do
+  factory :game do
+    uuid { 'MyString' }
+    host_id { 1 }
+    guest_id { 1 }
+    field_id { 1 }
+  end
 end
