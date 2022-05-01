@@ -72,6 +72,8 @@ jobs:
         run: cp -v config/database.example.yml config/database.yml
       - name: db create
         run: bundle exec rails db:create db:schema:load --trace
+      - name: assets:precompile
+        run: bundle exec rails assets:precompile
       - name: Run brakeman
         run: bundle exec brakeman
       - name: Run rails_best_practices
