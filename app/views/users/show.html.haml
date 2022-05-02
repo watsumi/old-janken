@@ -5,7 +5,7 @@
   = @user.nickname
 %p
   %b Character:
-  = @user.character_id
+  = @user.character.title
 
 = link_to 'Edit', edit_user_path(@user)
 \|

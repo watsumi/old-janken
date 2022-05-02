@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_characters_for_select, only: %i[edit update]
 
   # GET /users
   def index
@@ -52,6 +53,10 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:nickname, :status, :uuid_digest, :character_id)
+    params.require(:user).permit(:nickname, :character_id)
+  end
+
+  def set_characters_for_select
+    @characters_for_select = Character.all.pluck(:title, :id)
   end
 end

@@ -10,6 +10,11 @@
 #  character_id      :integer          default(1), not null
 #
 class User < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :character, foreign_key: :character_id, class_name: 'Character', inverse_of: :users
+
+  validates :character_id, presence: true
+
   attr_accessor :user_token
 
   def authenticated?(user_token)
