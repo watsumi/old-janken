@@ -1,6 +1,6 @@
 %h1 Editing user
 
-= render 'form', user: @user
+= render 'form', { user: @user, characters_for_select: @characters_for_select }
 
 = link_to 'Show', @user
 \|

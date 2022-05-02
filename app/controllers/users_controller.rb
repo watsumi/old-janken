@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
-  before_action :set_characters_for_select, only: %i[edit update]
+  before_action :set_characters_for_select, only: %i[new create edit update]
 
   # GET /users
   def index

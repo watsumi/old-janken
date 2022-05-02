@@ -10,7 +10,7 @@
     = f.label :nickname
     = f.text_field :nickname
   .field
-    = f.label :character
-    = f.select :character_id, options_for_select(@characters_for_select)
+    = f.label :character_id
+    = f.select :character_id, options_for_select(characters_for_select)
   .actions
     = f.submit 'Save'
