@@ -23,4 +23,5 @@
 #  fk_rails_...  (game_id => games.id)
 #
 class GameDetail < ApplicationRecord
+  belongs_to :game
 end

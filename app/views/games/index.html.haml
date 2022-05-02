@@ -1,6 +1,5 @@
 %h1 Listing games
-#users
-  - @games.each do |game|
-    = render 'game', game: game
+#games
+  = render @games
 
 = link_to 'New Game', new_game_path

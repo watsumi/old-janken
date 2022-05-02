@@ -1,6 +1,6 @@
 %h1 Editing game
 
-= render 'form', game: @game
+= render 'form', { game: @game, fields_for_select: @fields_for_select }
 
 = link_to 'Show', @game
 \|

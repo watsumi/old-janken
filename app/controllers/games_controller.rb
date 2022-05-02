@@ -1,9 +1,10 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
+  before_action :set_fields_for_select, only: %i[new create edit update]
 
   # GET /games
   def index
-    @games = Game.all
+    @games = current_user.games.all
   end
 
   # GET /games/1
@@ -11,7 +12,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
-    @game = Game.new
+    @game = current_user.games.new
   end
 
   # GET /games/1/edit
@@ -19,7 +20,7 @@ class GamesController < ApplicationController
 
   # POST /games
   def create
-    @game = Game.new(game_params)
+    @game = current_user.games.new(game_params)
 
     if @game.save
       redirect_to @game, notice: t('.success')
@@ -47,11 +48,15 @@ class GamesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = Game.find(params[:id])
+    @game = current_user.games.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:uuid, :host_id, :guest_id, :field_id)
+    params.require(:game).permit(:id, :guest_id, :field_id)
+  end
+
+  def set_fields_for_select
+    @fields_for_select = Field.all.pluck(:title, :id)
   end
 end

@@ -1,5 +1,5 @@
 %h1 New game
 
-= render 'form', game: @game
+= render 'form', { game: @game, fields_for_select: @fields_for_select }
 
 = link_to 'Back', games_path

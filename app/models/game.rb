@@ -7,15 +7,22 @@
 #  updated_at :datetime         not null
 #  field_id   :integer          default(1), not null
 #  guest_id   :integer
-#  users_id   :uuid             not null
+#  user_id    :uuid             not null
 #
 # Indexes
 #
-#  index_games_on_users_id  (users_id)
+#  index_games_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (users_id => users.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class Game < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
+
+  has_many :game_details, dependent: :destroy
+  belongs_to :user
+  belongs_to_active_hash :field, class_name: 'Field', inverse_of: :games
+
+  validates :field_id, presence: true
 end
