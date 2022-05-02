@@ -10,19 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_01_030121) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_02_104518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "game_details", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "user_id", null: false
-    t.string "game_id", null: false
-    t.integer "request_id", null: false
-    t.integer "attacker_role", null: false
-    t.integer "hand", null: false
-    t.integer "support_id", null: false
-    t.integer "round_score", null: false
+  create_table "game_details", force: :cascade do |t|
+    t.string "user_id", default: "0", null: false
+    t.string "game_id", default: "0", null: false
+    t.integer "request_id", default: 0, null: false
+    t.integer "hand_id", default: 0, null: false
+    t.integer "support_id", default: 0, null: false
+    t.integer "round_score", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "game_id"], name: "index_game_details_on_user_id_and_game_id"
@@ -30,16 +29,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_030121) do
 
   create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "field_id", default: 1, null: false
-    t.text "board_json", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_hands", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.string "hand_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "user_token_digest", default: "", null: false
+    t.string "user_token_digest"
     t.integer "role", null: false
     t.string "game_id", null: false
-    t.integer "character_id", default: 1, null: false
+    t.string "support_id", null: false
+    t.integer "character_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id", "role"], name: "index_users_on_game_id_and_role", unique: true
