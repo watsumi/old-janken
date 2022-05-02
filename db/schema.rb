@@ -16,36 +16,33 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_030121) do
   enable_extension "plpgsql"
 
   create_table "game_details", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "game_id", null: false
-    t.integer "hand_1", default: 0, null: false
-    t.integer "hand_2", default: 0, null: false
-    t.integer "hand_3", default: 0, null: false
-    t.integer "support_id", default: 0, null: false
-    t.integer "round_score_1", default: 0, null: false
-    t.integer "round_score_2", default: 0, null: false
-    t.integer "round_score_3", default: 0, null: false
+    t.string "user_id", null: false
+    t.string "game_id", null: false
+    t.integer "request_id", null: false
+    t.integer "attacker_role", null: false
+    t.integer "hand", null: false
+    t.integer "support_id", null: false
+    t.integer "round_score", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_game_details_on_game_id"
+    t.index ["user_id", "game_id"], name: "index_game_details_on_user_id_and_game_id"
   end
 
   create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "guest_id"
     t.integer "field_id", default: 1, null: false
-    t.uuid "user_id", null: false
+    t.text "board_json", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "nickname", default: "", null: false
     t.string "user_token_digest", default: "", null: false
+    t.integer "role", null: false
+    t.string "game_id", null: false
     t.integer "character_id", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id", "role"], name: "index_users_on_game_id_and_role", unique: true
   end
 
-  add_foreign_key "game_details", "games"
-  add_foreign_key "games", "users"
 end

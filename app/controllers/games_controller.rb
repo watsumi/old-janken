@@ -53,7 +53,7 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.require(:game).permit(:id, :guest_id, :field_id)
+    params.require(:game).permit(:id, :field_id)
   end
 
   def set_fields_for_select

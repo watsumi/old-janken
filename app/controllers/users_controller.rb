@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:nickname, :character_id)
+    params.require(:user).permit(:character_id)
   end
 
   def set_characters_for_select

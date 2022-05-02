@@ -3,24 +3,19 @@
 # Table name: game_details
 #
 #  id            :uuid             not null, primary key
-#  hand_1        :integer          default(0), not null
-#  hand_2        :integer          default(0), not null
-#  hand_3        :integer          default(0), not null
-#  round_score_1 :integer          default(0), not null
-#  round_score_2 :integer          default(0), not null
-#  round_score_3 :integer          default(0), not null
+#  attacker_role :integer          not null
+#  hand          :integer          not null
+#  round_score   :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  game_id       :uuid             not null
-#  support_id    :integer          default(0), not null
+#  game_id       :string           not null
+#  request_id    :integer          not null
+#  support_id    :integer          not null
+#  user_id       :string           not null
 #
 # Indexes
 #
-#  index_game_details_on_game_id  (game_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (game_id => games.id)
+#  index_game_details_on_user_id_and_game_id  (user_id,game_id)
 #
 FactoryBot.define do
   factory :game_detail do
