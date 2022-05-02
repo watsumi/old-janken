@@ -4,11 +4,12 @@
 #
 #  id                :uuid             not null, primary key
 #  role              :integer          not null
-#  user_token_digest :string           default(""), not null
+#  user_token_digest :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  character_id      :integer          default(1), not null
+#  character_id      :integer          not null
 #  game_id           :string           not null
+#  support_id        :string           not null
 #
 # Indexes
 #
@@ -17,12 +18,14 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe '#create_anonymously!' do
-    subject { User.create_anonymously! }
+  let(:game) { create(:game) }
 
-    it 'user_token_digestが生成され、userが作成されること' do
+  describe '#update_user_token!' do
+    let(:host) { build(:user, game:, role: 'host') }
+    subject { host.update_user_token! }
+
+    it 'user_token_digestが更新されること' do
       subject
-      expect(User.last.nickname).to eq('')
       expect(User.last.user_token_digest).to be_a_kind_of(String)
       expect(User.last.character_id).to eq(1)
     end
@@ -30,7 +33,8 @@ RSpec.describe User, type: :model do
 
   describe '#authenticated?' do
     let(:user) do
-      create(:user, user_token_digest: BCrypt::Password.create('user_token', cost: BCrypt::Engine::MIN_COST))
+      create(:user, game:,
+                    user_token_digest: BCrypt::Password.create('user_token', cost: BCrypt::Engine::MIN_COST))
     end
     subject { user.authenticated?(user_token) }
 

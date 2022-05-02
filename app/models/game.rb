@@ -3,7 +3,6 @@
 # Table name: games
 #
 #  id         :uuid             not null, primary key
-#  board_json :text             not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  field_id   :integer          default(1), not null
@@ -17,9 +16,8 @@ class Game < ApplicationRecord
   belongs_to_active_hash :field, class_name: 'Field', inverse_of: :games
 
   validates :field_id, presence: true
-  validates :board_json, presence: true
 
-  self.implicit_order_column = "created_at"
+  self.implicit_order_column = 'created_at'
 
   def host
     @host ||= users.find_by!(role: :host)
@@ -29,12 +27,8 @@ class Game < ApplicationRecord
     @guest ||= users.find_by!(role: :guest)
   end
 
-  def board
-    JSON.parse(board_json, object_class: Board)
-  end
-
   def spectator
-    User.new(id: 'spectator', role: :spectator, game_id: self.id)
+    User.new(id: 'spectator', role: :spectator, game_id: id)
   end
 
   def user_ids

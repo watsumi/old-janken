@@ -1,62 +1,74 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show edit update destroy]
-  before_action :set_fields_for_select, only: %i[new create edit update]
+  before_action :set_game, only: %i[show host guest spectator]
 
   # GET /games
   def index
-    @games = current_user.games.all
+    @games = Game.all
   end
 
   # GET /games/1
-  def show; end
+  def show
+    if @game.host.authenticated?(session)
+      redirect_to action: :host, id: @game.id
+      return
+    end
 
-  # GET /games/new
-  def new
-    @game = current_user.games.new
+    if @game.guest.authenticated?(session)
+      redirect_to action: :guest, id: @game.id
+      return
+    end
+
+    @guest = @game.guest
   end
-
-  # GET /games/1/edit
-  def edit; end
 
   # POST /games
   def create
-    @game = current_user.games.new(game_params)
+    game = Game.new(
+      field_id: Field.all.sample.id,
+    )
+    host = game.users.build(
+      role: :host,
+      character_id: Character.all.sample.id,
+      support_id: Support.all.sample.id,
+    )
+    guest = game.users.build(
+      role: :guest,
+      character_id: Character.all.sample.id,
+      support_id: Support.all.sample.id,
+    )
 
-    if @game.save
-      redirect_to @game, notice: t('.success')
-    else
-      render :new, status: :unprocessable_entity
+    host.set_user_token
+    game.save!
+    3.times do
+      host.set_hand!(host.character.name)
+      guest.set_hand!(guest.character.name)
     end
+    remember(host)
+
+    redirect_to action: :host, id: game.id
   end
 
-  # PATCH/PUT /games/1
-  def update
-    if @game.update(game_params)
-      redirect_to @game, notice: t('.success')
-    else
-      render :edit, status: :unprocessable_entity
-    end
+  def host
+    @account = @game.host
+    @enemy = @game.guest
+
+    redirect_to action: :show unless @account.authenticated?(session)
   end
 
-  # DELETE /games/1
-  def destroy
-    @game.destroy
-    redirect_to games_url, notice: t('.success')
+  def guest
+    @account = @game.guest
+
+    redirect_to action: :show unless @account.authenticated?(session)
+  end
+
+  def spectator
+    @account = @game.spectator
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = current_user.games.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def game_params
-    params.require(:game).permit(:id, :field_id)
-  end
-
-  def set_fields_for_select
-    @fields_for_select = Field.all.pluck(:title, :id)
+    @game = Game.find(params[:id])
   end
 end
