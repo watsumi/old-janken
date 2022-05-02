@@ -1,15 +1,6 @@
-%p#notice= notice
+- if !@guest.taken?
+  %p
+    = button_to '対戦を開始する', authorize_game_user_path(game_id: params[:id], id: @guest.id), method: :post
 
 %p
-  %b Host:
-  = @game.user
-%p
-  %b Guest:
-  = @game&.guest_id
-%p
-  %b Field:
-  = @game.field
-
-= link_to 'Edit', edit_game_path(@game)
-\|
-= link_to 'Back', games_path
+  = link_to '観戦する', spectator_game_url(game_id: params[:game_id])

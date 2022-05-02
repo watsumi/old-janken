@@ -1,14 +1,8 @@
-%p#notice= notice
-
-%p
-  %b Nickname:
-  = @user.nickname
-%p
-  %b Character:
-  = @user.character.title
-
-= link_to 'New Game', new_game_path
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+- if !@account.taken?
+  %p
+    = botton_to '対戦を開始する', authorize_game_user_path(game_id: params[:game_id], id: params[:id]), method: :post
+- else
+  - if @account.role == :host
+    %p
+      | 以下のページを最初に閲覧した人が、あなたの対戦相手になります。
+      %pre= game_user_url(game_id: @enemy.game_id, id: @enemy.id)
