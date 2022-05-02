@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration[7.0]
     create_table :games, id: :uuid do |t|
       t.integer :guest_id
       t.integer :field_id, null: false, default: 1
-      t.references :users, type: :uuid, null: false, foreign_key: true
+      t.references :user, type: :uuid, null: false, foreign_key: true
 
       t.timestamps
     end
