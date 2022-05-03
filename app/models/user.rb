@@ -31,7 +31,9 @@ class User < ApplicationRecord
     host: 1,
     guest: 2,
     spectator: 3,
-  }, _prefix: true
+  }
+
+  scope :hands, -> { includes(:user_hands).where(user_id: self.id) }
 
   attr_accessor :user_token
 

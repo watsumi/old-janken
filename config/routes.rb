@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :guest
     end
 
-    resources :users, only: %i[show edit update] do
+    resources :users, only: %i[show] do
       member do
         post :authorize
       end

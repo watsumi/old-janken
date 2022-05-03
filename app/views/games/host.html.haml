@@ -1,5 +1,3 @@
-= turbo_stream_from @me, :board
-
 .d-flex.justify-content-center
   %p
     | 以下のリンクから対戦相手・観戦者を募集できます。
@@ -8,3 +6,6 @@
   %p
     = link_to game_url(id: @game.id) do
       = game_url(id: @game.id)
+
+= render 'users/user', user: @enemy
+= render 'users/user', user: @account

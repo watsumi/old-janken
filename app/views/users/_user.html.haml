@@ -1,0 +1,8 @@
+- if user == current_user
+  - user.user_hands.each do |user_hand|
+    %p= user_hand.hand.name
+- elsif user.spectator?
+  - user.user_hands.each do |user_hand|
+    %p= user_hand.hand.name
+- else
+  %p='xxxxx'

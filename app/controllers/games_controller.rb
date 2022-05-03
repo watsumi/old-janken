@@ -8,17 +8,18 @@ class GamesController < ApplicationController
 
   # GET /games/1
   def show
-    if @game.host.authenticated?(session)
+    @host = @game.host
+    @guest = @game.guest
+
+    if @host.authenticated?(session)
       redirect_to action: :host, id: @game.id
       return
     end
 
-    if @game.guest.authenticated?(session)
+    if @guest.authenticated?(session)
       redirect_to action: :guest, id: @game.id
       return
     end
-
-    @guest = @game.guest
   end
 
   # POST /games
@@ -57,12 +58,15 @@ class GamesController < ApplicationController
 
   def guest
     @account = @game.guest
+    @enemy = @game.host
 
     redirect_to action: :show unless @account.authenticated?(session)
   end
 
   def spectator
     @account = @game.spectator
+    @host = @game.host
+    @guest = @game.guest
   end
 
   private

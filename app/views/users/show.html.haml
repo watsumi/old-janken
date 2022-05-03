@@ -1,8 +1,8 @@
 - if !@account.taken?
   %p
-    = botton_to '対戦を開始する', authorize_game_user_path(game_id: params[:game_id], id: params[:id]), method: :post
+    = button_to '対戦を開始する', authorize_game_user_path(game_id: params[:game_id], id: params[:id]), method: :post
 - else
-  - if @account.role == :host
+  - if @account.host?
     %p
       | 以下のページを最初に閲覧した人が、あなたの対戦相手になります。
       %pre= game_user_url(game_id: @enemy.game_id, id: @enemy.id)
