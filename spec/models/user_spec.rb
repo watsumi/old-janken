@@ -22,11 +22,15 @@ RSpec.describe User, type: :model do
 
   describe '#set_user_token' do
     let(:host) { build(:user, game:, role: 'host') }
-    subject { host.set_user_token; game.save! }
+    subject do
+      host.set_user_token
+      game.save!
+    end
 
     it 'user_token_digestが追加されること' do
-      expect{ subject }.to change{
-        host.user_token_digest }.from(nil).to(be_a_kind_of(String))
+      expect { subject }.to change {
+                              host.user_token_digest
+                            }.from(nil).to(be_a_kind_of(String))
     end
   end
 
@@ -36,7 +40,7 @@ RSpec.describe User, type: :model do
                     role: :host,
                     user_token_digest: BCrypt::Password.create('user_token', cost: BCrypt::Engine::MIN_COST))
     end
-    subject { user.authenticated?({user_token: user_token}) }
+    subject { user.authenticated?({ user_token: }) }
 
     context 'user_tokenが正しい値のとき' do
       let(:user_token) { 'user_token' }
@@ -65,21 +69,21 @@ RSpec.describe User, type: :model do
       let(:character) { hippogriff }
       it 'グーまたはチョキが選ばれること' do
         subject
-        expect(user.user_hands.first.hand_id).to eq("1").or eq("3")
+        expect(user.user_hands.first.hand_id).to eq('1').or eq('3')
       end
     end
     context 'ユバのとき' do
       let(:character) { yuba }
       it 'グーまたはチョキが選ばれること' do
         subject
-        expect(user.user_hands.first.hand_id).to eq("2").or eq("3")
+        expect(user.user_hands.first.hand_id).to eq('2').or eq('3')
       end
     end
     context 'カーバンクルのとき' do
       let(:character) { carbuncle }
       it 'グーまたはチョキが選ばれること' do
         subject
-        expect(user.user_hands.first.hand_id).to eq("1").or eq("2")
+        expect(user.user_hands.first.hand_id).to eq('1').or eq('2')
       end
     end
   end
