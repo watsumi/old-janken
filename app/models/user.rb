@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  has_many :user_hands
+  has_many :user_hands, dependent: :destroy
   belongs_to :game
   belongs_to_active_hash :character, class_name: 'Character', inverse_of: :users
   belongs_to_active_hash :support, class_name: 'Support', inverse_of: :users
