@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_many :user_hands
   belongs_to :game
   belongs_to_active_hash :character, class_name: 'Character', inverse_of: :users
+  belongs_to_active_hash :support, class_name: 'Support', inverse_of: :users
 
   validates :character_id, presence: true
 
@@ -52,11 +53,11 @@ class User < ApplicationRecord
   def set_hand!(character)
     case character
     when 'ヒポグリフ'
-      user_hands.create!(hand_id: [1, 2].sample)
+      user_hands.create!(hand_id: [1, 3].sample)
     when 'ユバの民'
       user_hands.create!(hand_id: [2, 3].sample)
     when 'カーバンクル'
-      user_hands.create!(hand_id: [1, 3].sample)
+      user_hands.create!(hand_id: [1, 2].sample)
     end
   end
 
