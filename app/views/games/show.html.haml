@@ -1,6 +1,7 @@
-- if !@guest.taken?
-  %p
-    = button_to '対戦を開始する', authorize_game_user_path(game_id: params[:id], id: @guest.id), method: :post
+.game{ class: @game.field.card_image }
+  - if !@guest.taken?
+    %p
+      = button_to '対戦を開始する', authorize_game_user_path(game_id: params[:id], id: @guest.id), method: :post
 
-%p
-  = link_to '観戦する', spectator_game_url(game_id: params[:game_id])
+  %p
+    = link_to '観戦する', spectator_game_url(game_id: params[:game_id])

@@ -7,14 +7,15 @@ gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', require: false
+gem 'cssbundling-rails'
 gem 'importmap-rails'
+gem 'jsbundling-rails'
 gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'redis', '~> 4.0'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
-gem 'tailwindcss-rails'
-gem 'turbo-rails'
+gem 'turbo-rails', '~> 1.0.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'active_hash', '~> 2.3.0'

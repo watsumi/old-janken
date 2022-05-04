@@ -1,6 +1,7 @@
-.d-flex.justify-content-center
-  .alert.alert-warn
-    | 観戦モードです
+.game{ class: @game.field.card_image }
+  .d-flex.justify-content-center
+    .alert.alert-warn
+      | 観戦モードです
 
-= render 'users/user', user: @host
-= render 'users/user', user: @guest
+  = render 'users/user', user: @host
+  = render 'users/user', user: @guest

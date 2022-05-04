@@ -1,4 +1,5 @@
-#home
-  = button_to 'CPU対戦', games_path, method: :post
-  = button_to 'リアルタイム対戦', games_path, method: :post
-  = link_to 'ルールを確認', root_path
+#home.d-flex.justify-content-center.position-relative
+  = button_to 'CPU対戦', games_path, method: :post, class: 'position-absolute top-0 mt-5 btn btn-primary w-25'
+  = button_to 'リアルタイム対戦', games_path, method: :post, class: 'position-absolute bottom-50 btn btn-primary w-25'
+  %div
+    = link_to 'ルールを確認', root_path, class: 'position-absolute bottom-0 mb-5 btn btn-primary w-25'

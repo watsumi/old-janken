@@ -1,0 +1,35 @@
+#welcome {
+  background-image: url('bg/start_bg.png');
+  background-color: #212121;
+  background-position: center center;
+  background-repeat: no-repeat;
+  @media (orientation: landscape) {
+    height: 800px;
+    background-size: auto 100%;
+  }
+  @media (orientation: portrait) {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform   : rotate(-90deg);
+    transform        : rotate(-90deg);
+    background-attachment: fixed;
+    height: 800px;
+  }
+}
+
+#home {
+  background-image: url('bg/start_bg.png');
+  background-color: #212121;
+  background-position: center center;
+  background-repeat: no-repeat;
+  @media (orientation: landscape) {
+    height: 800px;
+    background-size: auto 100%;
+  }
+  @media (orientation: portrait) {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform   : rotate(-90deg);
+    transform        : rotate(-90deg);
+    background-attachment: fixed;
+    height: 800px;
+  }
+}

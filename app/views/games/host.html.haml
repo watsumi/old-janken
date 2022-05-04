@@ -1,11 +1,12 @@
-.d-flex.justify-content-center
-  %p
-    | 以下のリンクから対戦相手・観戦者を募集できます。
+.game{ class: @game.field.card_image }
+  .d-flex.justify-content-center
+    %p
+      | 以下のリンクから対戦相手・観戦者を募集できます。
 
-.d-flex.justify-content-center
-  %p
-    = link_to game_url(id: @game.id) do
-      = game_url(id: @game.id)
+  .d-flex.justify-content-center
+    %p
+      = link_to game_url(id: @game.id) do
+        = game_url(id: @game.id)
 
-= render 'users/user', user: @enemy
-= render 'users/user', user: @account
+  = render 'users/user', user: @enemy
+  = render 'users/user', user: @account

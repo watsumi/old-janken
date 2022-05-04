@@ -1,0 +1,43 @@
+.game{
+  background-color: #212121;
+  background-position: center center;
+  background-repeat: no-repeat;
+  @media (orientation: landscape) {
+    height: 800px;
+    background-size: auto 100%;
+  }
+  @media (orientation: portrait) {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform   : rotate(-90deg);
+    transform        : rotate(-90deg);
+    background-attachment: fixed;
+    height: 800px;
+  }
+  &.sand-capital-morning{
+    background-image: url('fields/sand-capital-morning.png');
+  }
+  &.sand-capital-evening{
+    background-image: url('fields/sand-capital-evening.png');
+  }
+  &.sand-capital-night{
+    background-image: url('fields/sand-capital-night.png');
+  }
+  &.water-village-morning{
+    background-image: url('fields/water-village-morning.png');
+  }
+  &.water-village-evening{
+    background-image: url('fields/water-village-evening.png');
+  }
+  &.water-village-night{
+    background-image: url('fields/water-village-night.png');
+  }
+  &.grasslands-morning{
+    background-image: url('fields/grasslands-morning.png');
+  }
+  &.grasslands-evening{
+    background-image: url('fields/grasslands-evening.png');
+  }
+  &.grasslands-night{
+    background-image: url('fields/grasslands-night.png');
+  }
+}

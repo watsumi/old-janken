@@ -18,7 +18,7 @@ class GamesController < ApplicationController
 
     if @guest.authenticated?(session)
       redirect_to action: :guest, id: @game.id
-      return
+      nil
     end
   end
 

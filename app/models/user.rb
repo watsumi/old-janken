@@ -33,7 +33,7 @@ class User < ApplicationRecord
     spectator: 3,
   }
 
-  scope :hands, -> { includes(:user_hands).where(user_id: self.id) }
+  scope :hands, -> { includes(:user_hands).where(user_id: id) }
 
   attr_accessor :user_token
 
