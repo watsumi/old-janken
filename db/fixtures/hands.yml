@@ -1,16 +1,12 @@
-- id: 0
-  name: ""
-  description: ""
-  card_image: ""
 - id: 1
   name: rock
   description: グー
-  card_image: rock
+  card_image: 'cards/rock'
 - id: 2
   name: paper
   description: パー
-  card_image: paper
+  card_image: 'cards/paper'
 - id: 3
   name: scissors
   card_image: チョキ
-  card_image: scissors
+  card_image: 'cards/scissors'

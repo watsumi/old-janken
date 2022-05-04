@@ -6,7 +6,7 @@ RSpec.describe '/games', type: :request do
       it 'redirect' do
         post '/games'
         game = Game.first
-        expect(responce).to redirect_to("/games/#{game.id}/host")
+        expect(response).to redirect_to("/games/#{game.id}/host")
       end
     end
   end
