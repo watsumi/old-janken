@@ -16,4 +16,8 @@ class UsersController < ApplicationController
 
     redirect_to guest_game_path(id: params[:game_id])
   end
+
+  def details
+    @account = User.find(params[:id])
+  end
 end

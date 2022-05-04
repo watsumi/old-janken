@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[show] do
       member do
+        get :details
         post :authorize
       end
       resources :game_details, only: %i[create]

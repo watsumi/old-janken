@@ -1,8 +1,20 @@
 - if user == current_user
-  - user.user_hands.each do |user_hand|
-    %p= user_hand.hand.name
+  %div
+    - user.user_hands.each do |user_hand|
+      = link_to '#' do
+        = image_tag user_hand.hand.card_image, size: '180x240'
+    = link_to '#' do
+      = image_tag user.support.card_image, size: '180x240'
 - elsif user.spectator?
-  - user.user_hands.each do |user_hand|
-    %p= user_hand.hand.name
+  %div
+    - user.user_hands.each do |user_hand|
+      = link_to '#' do
+        =image_tag user_hand.hand.card_image, size: '180x240'
+    = link_to '#' do
+      = image_tag user.support.card_image, size: '180x240'
 - else
-  %p='xxxxx'
+  %div
+    - user.user_hands.each do |user_hand|
+      = image_tag 'cards/card-back', size: '180x240', class: 'enemy-card'
+    - if user.support.present?
+      = image_tag 'cards/card-back', size: '180x240', class: 'enemy-card'

@@ -41,3 +41,13 @@
     background-image: url('fields/grasslands-night.png');
   }
 }
+
+a {
+  text-decoration: none; 
+}
+
+.enemy-card {
+  -webkit-transform: rotate(180deg);
+  -moz-transform   : rotate(180deg);
+  transform        : rotate(180deg);
+}
