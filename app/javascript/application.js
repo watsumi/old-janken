@@ -2,3 +2,6 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
+
+// debugモードを有効化
+application.debug = true
