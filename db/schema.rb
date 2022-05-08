@@ -16,14 +16,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
   enable_extension "plpgsql"
 
   create_table "game_details", force: :cascade do |t|
-    t.string "user_id", null: false
-    t.string "game_id", null: false
+    t.uuid "user_id"
+    t.uuid "game_id"
     t.integer "turn", null: false
     t.integer "hand_id"
     t.integer "support_id"
     t.integer "round_score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_details_on_game_id"
+    t.index ["user_id"], name: "index_game_details_on_user_id"
   end
 
   create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -34,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
   end
 
   create_table "user_hands", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "user_id"
+    t.uuid "user_id"
     t.bigint "hand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
   end
 
   create_table "user_supports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "user_id"
+    t.uuid "user_id"
     t.bigint "support_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,4 +63,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
     t.index ["game_id", "role"], name: "index_users_on_game_id_and_role", unique: true
   end
 
+  add_foreign_key "game_details", "games"
+  add_foreign_key "game_details", "users"
+  add_foreign_key "user_hands", "users"
+  add_foreign_key "user_supports", "users"
 end

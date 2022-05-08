@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: game_details
+#
+#  id          :bigint           not null, primary key
+#  round_score :integer
+#  turn        :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  game_id     :uuid
+#  hand_id     :integer
+#  support_id  :integer
+#  user_id     :uuid
+#
+# Indexes
+#
+#  index_game_details_on_game_id  (game_id)
+#  index_game_details_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (game_id => games.id)
+#  fk_rails_...  (user_id => users.id)
+#
 class GameDetail < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
@@ -28,7 +52,4 @@ class GameDetail < ApplicationRecord
     "Round #{turn.gsub(/(ho|gue)st_turn_/, '')}"
   end
 
-  # def user_hand = @user_hand ||= Hand.find_by!(id: hand_id) if hand_id.present?
-
-  # def user_support = @user_support ||= Support.find_by!(id: support_id) if support_id.present?
 end
