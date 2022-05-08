@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
-  skip_before_action :require_login, only: %i[ index create paticipate ]
-  before_action :set_game, only: %i[ show destroy paticipate ]
+  skip_before_action :require_login, only: %i[ index create paticipates ]
+  before_action :set_game, only: %i[ show destroy paticipates ]
 
   # GET /games
   def index
@@ -37,7 +37,11 @@ class GamesController < ApplicationController
     redirect_to games_url, notice: "Game was successfully destroyed."
   end
 
-  def paticipate; end
+  def paticipates; end
+
+  def rule; end
+
+  def rule; end
 
   private
     # Use callbacks to share common setup or constraints between actions.

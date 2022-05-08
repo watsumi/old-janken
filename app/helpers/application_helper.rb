@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def is_game_page?
+    !(current_page?(root_path) || current_page?(rules_path) || current_page?(terms_path) || current_page?(credits_path) || current_page?(privacy_policy_path))
+  end
+
   def icon(icon_name)
     tag.i(class: ["bi", "bi-#{icon_name}"])
   end
