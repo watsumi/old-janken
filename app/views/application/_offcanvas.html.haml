@@ -1,0 +1,28 @@
+.offcanvas.offcanvas-start{ tabindex: "-1", id: "offcanvas", 'aria-labelledby': "offcanvasExampleLabel"}
+  .offcanvas-header
+    = image_tag 'logo', {id: 'logo'}
+    %button{ type: "button", class: "btn-close text-reset", 'data-bs-dismiss': "offcanvas", 'aria-label': "Close" }
+  .offcanvas-body
+    %ul
+      %li.m-3
+        = link_to root_path, class: 'text-black' do
+          %i.bi.bi-house-door-fill &nbsp;&nbsp;&nbsp;トップページ
+      - if current_page?(root_path)
+        %li.m-3
+          = button_to games_path, method: :post, class: 'btn btn-default p-0' do
+            %i.bi.bi-controller &nbsp;&nbsp;&nbsp;リアルタイム対戦
+      - else
+        %li.m-3
+          = link_to game_path(@game), class: 'text-black' do
+            %i.bi.bi-joystick &nbsp;&nbsp;&nbsp;ゲームに戻る
+        %li.m-3
+          = link_to game_game_details_path(@game), class: 'text-black' do
+            %i.bi.bi-ticket-detailed-fill &nbsp;&nbsp;&nbsp;ゲーム詳細
+        - if !current_page?(game_game_details_path(@game))
+          %li.m-3
+            = link_to "https://twitter.com/intent/tweet?text=対戦相手募集中！%0Ahttps://old-janken.com#{paticipate_game_path}/%0A&hashtags=旧約じゃんけん,クソアプリWeek&via=old_janken", target: :_blank, rel: "noopener noreferrer" do
+              %i.bi.bi-twitter &nbsp;&nbsp;&nbsp;対戦を募集する
+          %li.m-3
+            = link_to "https://line.me/R/msg/text/?対戦相手募集中！%0Ahttps://old-janken.com#{paticipate_game_path}/", target: :_blank, rel: "noopener noreferrer" do
+              %i.bi.bi-line &nbsp;&nbsp;&nbsp;対戦を募集する
+

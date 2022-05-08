@@ -1,19 +1,11 @@
 .game{
-  background-color: #212121;
-  background-position: center center;
+  /* Full height */
+  height: 800px;
+  /* Center and scale the image nicely */
+  background-position: center;
   background-repeat: no-repeat;
-  @media (orientation: landscape) {
-    height: 800px;
-    background-size: contain;
-  }
-  @media (orientation: portrait) {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform   : rotate(-90deg);
-    transform        : rotate(-90deg);
-    top: 0;
-    width: 1000px;
-    background-size: contain;
-  }
+  background-color: #212121;
+  background-size: contain;
   &.sand-capital-morning{
     background-image: url('fields/sand-capital-morning.png');
   }
@@ -53,5 +45,18 @@ a {
   transform        : rotate(180deg);
   &.non-character-card {
     pointer-events: none;
+  }
+}
+
+.offcanvas-body {
+  ul{
+    list-style: none;
+    li{
+      margin-left: 8px;
+      line-height: 32px;
+    }
+    li:hover{
+      background-color: #e9ecef;
+    }
   }
 }

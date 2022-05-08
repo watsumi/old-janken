@@ -1,9 +1,7 @@
 - if defined?(message)
   #flashes
-    .mb-2.toast.hide.border-primary{ data: { controller: "toast" } }
-      .toast-header.text-primary
+    .mb-2.toast.hide.border-default{ data: { controller: "toast" } }
+      .toast-body.d-flex.justify-content-between.text-default
         %strong.me-auto
-          = icon_with_text("check-circle", "成功")
+          = icon_with_text("check-circle", message)
         %button.btn-close{ data: { 'bs-dismiss': "toast" } }
-      .toast-body
-        = message

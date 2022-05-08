@@ -5,16 +5,24 @@
 #flashes {
   position: fixed;
   top: 0;
+  right: 0;
   margin: 0.75rem;
   z-index: 9999;
+}
+
+img.card{
   @media (orientation: landscape) {
-    right: 0;
-    margin: 0.75rem;
+    width: 180px;
+    height: 240px;
   }
   @media (orientation: portrait) {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform   : rotate(-90deg);
-    transform        : rotate(-90deg);
-    left: 0;
+    width: 90px;
+    height: 120px;
   }
+}
+
+#logo {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
 }

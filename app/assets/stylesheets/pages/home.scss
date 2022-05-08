@@ -1,35 +1,27 @@
 #welcome {
+  height: 800px;
   background-image: url('bg/start_bg.png');
   background-color: #212121;
   background-position: center center;
   background-repeat: no-repeat;
-  @media (orientation: landscape) {
-    height: 800px;
-    background-size: contain;
-  }
-  @media (orientation: portrait) {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform   : rotate(-90deg);
-    transform        : rotate(-90deg);
-    height: 800px;
-    background-size: contain;
-  }
+  background-size: contain;
 }
 
 #home {
+  height: 800px;
   background-image: url('bg/start_bg.png');
   background-color: #212121;
   background-position: center center;
   background-repeat: no-repeat;
-  @media (orientation: landscape) {
-    height: 800px;
-    background-size: contain;
-  }
-  @media (orientation: portrait) {
-    -webkit-transform: rotate(-90deg);
-    -moz-transform   : rotate(-90deg);
-    transform        : rotate(-90deg);
-    height: 800px;
-    background-size: contain;
+  background-size: contain;
+  form {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    color: #fff;
+    text-align: center;
+    width: 300px;
   }
 }

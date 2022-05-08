@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#welcome'
-  get '/home', to: 'home#index'
+  root 'games#index'
 
   resources :games, shallow: true do
     member do

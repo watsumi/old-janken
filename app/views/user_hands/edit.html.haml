@@ -1,2 +1,2 @@
 = render "modal", card: @card do
-  = button_to "確定", user_hand_path(@user_hand, game_id: @game), method: :delete, data: { 'bs-dismiss': "modal" }
+  = button_to "確定", user_hand_path(@user_hand, game_id: @game), method: :delete, data: { 'bs-dismiss': "modal" }, class: 'btn btn-primary'
