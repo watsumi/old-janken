@@ -4,8 +4,11 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import ModalController from "./modal_controller.js"
 application.register("modal", ModalController)
+
+import RedirectController from "./redirect_controller.js"
+application.register("redirect", RedirectController)
+
+import ToastController from "./toast_controller.js"
+application.register("toast", ToastController)
