@@ -10,16 +10,16 @@ module ApplicationHelper
       canonical: request.original_url,
       separator: '|',
       icon: [
-        { href: image_url('favicon.ico') },
-        { href: image_url('icon.png'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/png' },
+        { href: "#{root_url}favicon.ico" },
+        { href: "#{root_url}apple-touch-icon.png", rel: 'apple-touch-icon', sizes: '180x180', type: 'image/png' },
       ],
       og: {
-        site_name: :site
-        title: :title
-        description: :description
+        site_name: :site,
+        title: :title,
+        description: :description,
         type: 'website',
         url: request.original_url,
-        image: image_url('ogp.png'),
+        image: "#{root_url}ogp.png",
         locale: 'ja_JP',
       },
       twitter: {
@@ -28,7 +28,7 @@ module ApplicationHelper
         description: :description,
         card: 'summary_large_image',
         site: '@old-janken',
-        image: image_url('ogp.png'),
+        image: "#{root_url}ogp.png",
       }
     }
   end
