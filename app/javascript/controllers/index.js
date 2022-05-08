@@ -9,3 +9,6 @@ application.register("modal", ModalController)
 
 import ToastController from "./toast_controller.js"
 application.register("toast", ToastController)
+
+import ClipboardController from "./clipboard_controller.js"
+application.register("clipboard", ClipboardController)

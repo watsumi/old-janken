@@ -21,8 +21,9 @@ class GamesController < ApplicationController
         
         if @game.create_game_and_set_user_cards!
           remember(host)
-          format.html { redirect_to @game, notice: "Game was successfully created." }
+          format.html { redirect_to @game }
           format.json { render :show, status: :ok, location: @game }
+          @game.notify_to_game('ゲームを作成しました！')
         else
           format.html { render :new, status: :unprocessable_entity }
         end

@@ -14,13 +14,12 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
-  form {
+  form, .card {
     position: absolute;
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 15px 30px;
-    color: #fff;
     text-align: center;
     width: 300px;
   }
