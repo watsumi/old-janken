@@ -5,7 +5,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :user_token_digest
       t.integer :role, null: false
       t.string :game_id, null: false
-      t.string :support_id, null: false
       t.integer :character_id, null: false
 
       t.timestamps

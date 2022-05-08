@@ -10,41 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_02_104518) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "game_details", force: :cascade do |t|
-    t.string "user_id", default: "0", null: false
-    t.string "game_id", default: "0", null: false
-    t.integer "request_id", default: 0, null: false
-    t.integer "hand_id", default: 0, null: false
-    t.integer "support_id", default: 0, null: false
-    t.integer "round_score", default: 0, null: false
+    t.string "user_id", null: false
+    t.string "game_id", null: false
+    t.integer "turn", null: false
+    t.integer "hand_id"
+    t.integer "support_id"
+    t.integer "round_score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "game_id"], name: "index_game_details_on_user_id_and_game_id"
   end
 
   create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "field_id", default: 1, null: false
+    t.integer "winner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_hands", force: :cascade do |t|
-    t.string "user_id", null: false
-    t.string "hand_id", null: false
+  create_table "user_hands", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "hand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hand_id"], name: "index_user_hands_on_hand_id"
+    t.index ["user_id"], name: "index_user_hands_on_user_id"
+  end
+
+  create_table "user_supports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "support_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["support_id"], name: "index_user_supports_on_support_id"
+    t.index ["user_id"], name: "index_user_supports_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "user_token_digest"
     t.integer "role", null: false
     t.string "game_id", null: false
-    t.string "support_id", null: false
     t.integer "character_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
