@@ -4,14 +4,15 @@
   background-repeat: no-repeat;
   @media (orientation: landscape) {
     height: 800px;
-    background-size: auto 100%;
+    background-size: contain;
   }
   @media (orientation: portrait) {
     -webkit-transform: rotate(-90deg);
     -moz-transform   : rotate(-90deg);
     transform        : rotate(-90deg);
-    background-attachment: fixed;
-    height: 800px;
+    top: 0;
+    width: 1000px;
+    background-size: contain;
   }
   &.sand-capital-morning{
     background-image: url('fields/sand-capital-morning.png');
@@ -43,11 +44,14 @@
 }
 
 a {
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .enemy-card {
   -webkit-transform: rotate(180deg);
   -moz-transform   : rotate(180deg);
   transform        : rotate(180deg);
+  &.non-character-card {
+    pointer-events: none;
+  }
 }
