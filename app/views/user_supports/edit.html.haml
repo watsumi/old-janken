@@ -1,0 +1,2 @@
+= render "modal", card: @card do
+  = button_to '発動', user_support_path(@user_support, game_id: @game), method: :delete, data: { 'bs-dismiss': "modal" }

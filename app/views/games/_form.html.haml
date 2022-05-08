@@ -1,0 +1,6 @@
+= turbo_frame_tag game do
+  = form_with model: @game, data: { action: "turbo:submit-end->modal#close" } do |f|
+    = f.hidden_field :user_id, value: params[:user]
+    = f.label :field_id
+    = f.hidden_field :field_id
+    = f.submit

@@ -1,0 +1,4 @@
+- if !@game.guest.taken?
+  = button_to '対戦を開始する', user_authorize_path(game_id: params[:id], user_id: @guest.id), method: :post
+- else
+  %p この対戦の募集は締め切られました

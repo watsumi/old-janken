@@ -1,0 +1,14 @@
+= turbo_frame_tag game do
+  = render "background" do
+    - if current_user.host_role?
+      %div
+        = render 'users/user', game: game, user: @guest
+      %div
+        = render 'users/user', game: game, user: @host
+    - elsif current_user.guest_role?
+      %div
+        = render 'users/user', game: game, user: @host
+      %div
+        = render 'users/user', game: game, user: @guest
+
+= link_to 'show', game_game_details_path(game)

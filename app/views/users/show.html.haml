@@ -1,8 +1,10 @@
-- if !@account.taken?
-  %p
-    = button_to '対戦を開始する', authorize_game_user_path(game_id: params[:game_id], id: params[:id]), method: :post
-- else
-  - if @account.host?
-    %p
-      | 以下のページを最初に閲覧した人が、あなたの対戦相手になります。
-      %pre= game_user_url(game_id: @enemy.game_id, id: @enemy.id)
+%p{:style => "color: green"}= notice
+= render @user
+%div
+  = link_to "Edit this user", edit_user_path(@user)
+  %br
+  = link_to "Back to games", game_path(@user.game)
+  %br
+  = link_to "Back to users", game_users_path(@user.game)
+  %br
+  =button_to "Destroy this user", @user, method: :delete

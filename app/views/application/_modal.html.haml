@@ -1,0 +1,14 @@
+= turbo_frame_tag "modal" do
+  .modal.fade{ data: { controller: "modal" } }
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          %h5.modal-title
+            = card.name
+          %button.btn-close{ type:"button", data: { 'bs-dismiss': "modal" }, 'aria-label': "Close"}
+        .modal-body.d-flex.justify-content-between
+          %p.text-break.lh-lg.mx-3= card.description
+          = image_tag card.card_image, size: '180x240'
+        - if is_my_turn?(@game.game_details.last) && card.type != 'character'
+          .modal-footer
+            = yield

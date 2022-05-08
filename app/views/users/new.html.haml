@@ -1,0 +1,4 @@
+= render "modal" do
+  = render "form", user: @user
+  %br
+  = link_to "Back to users", game_users_path(@user.game)

@@ -1,11 +1,10 @@
-= turbo_frame_tag "modal" do
+- if defined?(game_details)
   .modal.fade{ data: { controller: "modal" } }
     .modal-dialog.modal-dialog-centered
       .modal-content
         .modal-header
           %h5.modal-title
-            = user.character.name
+            ゲーム詳細
           %button.btn-close{ type:"button", data: { 'bs-dismiss': "modal" }, 'aria-label': "Close"}
-        .modal-body.d-flex.justify-content-center
-          = user.character.description
-          = image_tag user.character.card_image, size: '180x240'
+        .modal-body.d-flex.justify-content-between.overflow-scroll
+          = render game_details

@@ -1,7 +1,18 @@
-.game{ class: @game.field.card_image }
-  - if !@guest.taken?
-    %p
-      = button_to '対戦を開始する', authorize_game_user_path(game_id: params[:id], id: @guest.id), method: :post
+-# flash message
+= turbo_stream_from dom_id(@game, 'flashes')
+= turbo_frame_tag 'flash' do
+  = render 'flash'
 
-  %p
-    = link_to '観戦する', spectator_game_url(game_id: params[:game_id])
+-# game
+= turbo_stream_from @game
+= render @game
+
+-# detail modal
+= turbo_stream_from dom_id(@game, 'detail')
+= turbo_frame_tag "detail_modal" do
+  = render 'detail_modal'
+
+-# finish modal
+= turbo_stream_from dom_id(@game, 'finish')
+= turbo_frame_tag "finish_modal" do
+  = render 'finish_modal'

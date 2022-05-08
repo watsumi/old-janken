@@ -1,0 +1,10 @@
+- if game_detail.hand.present?
+  %div.mx-3
+    = game_detail.round_num
+    %br
+    = game_detail.user.role
+    %br
+    = game_detail.round_score
+    %br
+    %p 得点
+    = image_tag game_detail.hand.card_image, size: '180x240'

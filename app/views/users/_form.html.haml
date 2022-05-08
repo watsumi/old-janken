@@ -1,0 +1,9 @@
+= turbo_frame_tag user do
+  = form_with model: @user do |f|
+    = f.hidden_field :card_type, value: params[:card_type]
+    = f.hidden_field :card_id, value: params[:card_id]
+    = f.hidden_field :turn, value: params[:turn]
+    = f.fields_for :user_hands do |user_hand_form|
+      = user_hand_form.label :hand_id
+      = user_hand_form.hidden_field :hand_id
+    = f.submit '発動', data: { action: "turbo:click->modal#close" } 
