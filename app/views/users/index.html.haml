@@ -1,7 +1,7 @@
-%h1 Listing users
+%p{:style => "color: green"}= notice
+%h1 Users
 #users
   - @users.each do |user|
-    = render 'user', user: user
-
-
-= link_to 'New User', new_user_path
+    = render user
+    %p
+      = link_to "Show this user", user

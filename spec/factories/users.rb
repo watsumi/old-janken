@@ -3,15 +3,20 @@
 # Table name: users
 #
 #  id                :uuid             not null, primary key
-#  nickname          :string           default(""), not null
-#  user_token_digest :string           default(""), not null
+#  role              :integer          not null
+#  user_token_digest :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  character_id      :integer          default(1), not null
+#  character_id      :integer          not null
+#  game_id           :string           not null
+#
+# Indexes
+#
+#  index_users_on_game_id_and_role  (game_id,role) UNIQUE
 #
 FactoryBot.define do
   factory :user do
-    sequence(:nickname) { |n| "Nick Name #{n.to_s.rjust(5, '0')}" }
-    character_id { 1 }
+    sequence(:character_id) { rand(1..3) }
+    sequence(:support_id) { rand(1..3) }
   end
 end

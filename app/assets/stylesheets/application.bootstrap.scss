@@ -1,0 +1,9 @@
+$h1-font-size: 1rem; // this line was added  
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+@import 'common.scss';
+
+//individual pages
+@import 'pages/home.scss';
+@import 'pages/game.scss';

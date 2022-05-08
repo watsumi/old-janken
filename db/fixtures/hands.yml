@@ -1,0 +1,15 @@
+- id: 1
+  type: 'hand'
+  name: rock
+  description: グー
+  card_image: 'cards/rock'
+- id: 2
+  type: 'hand'
+  name: paper
+  description: パー
+  card_image: 'cards/paper'
+- id: 3
+  type: 'hand'
+  name: scissors
+  description: チョキ
+  card_image: 'cards/scissors'

@@ -1,0 +1,25 @@
+#home
+  .card.p-0
+    = link_to 'トップページ', root_path, class: 'btn btn-primary'
+  = render 'fullscreen_modal', title: 'ルール' do
+    %h2 ルール
+    %hr
+    %p じゃんけんを3ラウンド行い、3ラウンドの合計点で勝敗を決定します。
+    %p ただし、キャラクターによって出すことができる手が決まっており、フィールドと時刻によって得られる得点が変化します。
+    %h2 カード一覧
+    %hr
+    %h3 キャラクターカード
+    %hr
+    = render partial: 'card_details', collection: @characters, as: 'card'
+    %br
+    %h3 サポートカード
+    %hr
+    = render partial: 'card_details', collection: @supports, as: 'card'
+    %br
+    %h3 ハンドカード
+    %hr
+    = render partial: 'card_details', collection: @hands, as: 'card'
+    %br
+    %h2 フィールド一覧
+    %hr
+    = render partial: 'card_details', collection: @fields, as: 'card'

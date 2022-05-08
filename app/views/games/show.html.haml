@@ -1,15 +1,18 @@
-%p#notice= notice
+-# flash message
+= turbo_stream_from dom_id(@game, 'flashes')
+= turbo_frame_tag 'flash' do
+  = render 'flash'
 
-%p
-  %b Host:
-  = @game.user
-%p
-  %b Guest:
-  = @game&.guest
-%p
-  %b Field:
-  = @game.field
+-# game
+= turbo_stream_from @game
+= render @game
 
-= link_to 'Edit', edit_game_path(@game)
-\|
-= link_to 'Back', games_path
+-# detail modal
+= turbo_stream_from dom_id(@game, 'detail')
+= turbo_frame_tag "detail_modal" do
+  = render 'detail_modal'
+
+-# finish modal
+= turbo_stream_from dom_id(@game, 'finish')
+= turbo_frame_tag "finish_modal" do
+  = render 'finish_modal'

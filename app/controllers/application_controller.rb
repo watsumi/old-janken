@@ -1,13 +1,15 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  before_action :set_user
+  before_action :require_login
+  helper_method :secret_clearance
 
-  private
+  def secret_clearance
+    session[:clearance].presence || false
+  end
 
-  def set_user
-    return if current_user
-
-    user = User.create_anonymously!
-    remember(user)
+  def require_login
+    unless current_user
+      redirect_to root_path
+    end
   end
 end

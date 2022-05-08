@@ -1,12 +1,10 @@
-%p#notice= notice
-
-%p
-  %b Nickname:
-  = @user.nickname
-%p
-  %b Character:
-  = @user.character_id
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+%p{:style => "color: green"}= notice
+= render @user
+%div
+  = link_to "Edit this user", edit_user_path(@user)
+  %br
+  = link_to "Back to games", game_path(@user.game)
+  %br
+  = link_to "Back to users", game_users_path(@user.game)
+  %br
+  =button_to "Destroy this user", @user, method: :delete

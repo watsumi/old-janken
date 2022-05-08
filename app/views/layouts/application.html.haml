@@ -2,13 +2,18 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title OldJanken
+    %title 旧約じゃんけん
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "no-cache", :name => "turbo-cache-control" }/
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_importmap_tags
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
   %body
-    %main.container.mx-auto.mt-28.px-5.flex
+    %main
       = yield
+    = turbo_frame_tag "modal"
+    = render 'offcanvas'
+    %button.btn.btn-light.position-fixed.top-0.end-0.m-3{ type: "button", 'data-bs-toggle': "offcanvas", 'data-bs-target': "#offcanvas", 'aria-controls': "offcanvasExample" }
+      %i.bi.bi-list

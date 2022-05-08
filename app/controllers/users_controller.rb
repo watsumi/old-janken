@@ -1,57 +1,41 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
-
-  # GET /users
-  def index
-    @users = User.all
-  end
+  skip_before_action :require_login, only: %i[ authorize ]
+  before_action :set_user, only: %i[ show edit ]
+  before_action :set_game, only: %i[ show edit ]
 
   # GET /users/1
-  def show; end
-
-  # GET /users/new
-  def new
-    @user = User.new
+  def show
   end
 
   # GET /users/1/edit
-  def edit; end
-
-  # POST /users
-  def create
-    @user = User.new(user_params)
-
-    if @user.save
-      redirect_to @user, notice: t('.success')
-    else
-      render :new, status: :unprocessable_entity
-    end
+  def edit
+    @card = @user.character
   end
 
-  # PATCH/PUT /users/1
-  def update
-    if @user.update(user_params)
-      redirect_to @user, notice: t('.success')
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
+  def authorize
+    game = Game.find_by!(id: params[:game_id])
+    User.transaction do
+      user = User.lock.find_by!(game_id: params[:game_id], id: params[:user_id])
+      next if user.taken? && current_user == game.host # guestが未確定であり、current_userがホストでなければ、current_userをguestとする
 
-  # DELETE /users/1
-  def destroy
-    @user.destroy
-    redirect_to users_url, notice: t('.success')
+      user.set_user_token
+      user.save!
+      remember(user)
+    end
+
+    redirect_to game_path(id: params[:game_id])
+    game.notify_to_game("guestが参加しました！")
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def user_params
-    params.require(:user).permit(:nickname, :status, :uuid_digest, :character_id)
-  end
+    def set_game
+      @game = @user.game
+      @host = @game.host
+      @guest = @game.guest
+    end
 end

@@ -74,11 +74,11 @@ jobs:
         run: bundle exec rails db:create db:schema:load --trace
       - name: assets:precompile
         run: bundle exec rails assets:precompile
-      - name: Run brakeman
-        run: bundle exec brakeman
-      - name: Run rails_best_practices
-        run: bundle exec rails_best_practices
       - name: Run rubocop
         run: bundle exec rubocop
       - name: Run rspec
         run: bundle exec rspec
+      # - name: Run brakeman
+      #   run: bundle exec brakeman
+      # - name: Run rails_best_practices
+      #   run: bundle exec rails_best_practices

@@ -1,6 +1,16 @@
-%div
-  = game.guest_id
-  = game.field_id
-  = link_to 'Show', game
-  = link_to 'Edit', edit_game_path(game)
-  = link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
+= turbo_frame_tag game do
+  = render "background" do
+    .d-flex.flex-column.justify-content-center
+      - if current_user.host_role?
+        .d-flex.flex-row.justify-content-center.mb-5
+          = render 'users/user', game: game, user: @guest
+        .d-flex.flex-row.justify-content-center.mt-5
+          = render 'users/user', game: game, user: @host
+      - elsif current_user.guest_role?
+        .d-flex.flex-row.justify-content-center.mb-5
+          = render 'users/user', game: game, user: @host
+        .d-flex.flex-row.justify-content-center.mt-5
+          = render 'users/user', game: game, user: @guest
+
+%button.btn.btn-light.position-fixed.top-0.end-0.m-3{ type: "button", 'data-bs-toggle': "offcanvas", 'data-bs-target': "#offcanvas", 'aria-controls': "offcanvasExample" }
+  %i.bi.bi-list

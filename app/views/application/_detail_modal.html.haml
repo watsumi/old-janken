@@ -1,0 +1,15 @@
+- if defined?(host_game_detail) && defined?(guest_game_detail)
+  .modal.fade{ data: { controller: "modal" } }
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          %h5.modal-title
+            = host_game_detail.round_num
+          %button.btn-close{ type:"button", data: { 'bs-dismiss': "modal" }, 'aria-label': "Close"}
+        .modal-body.d-flex.justify-content-between
+          %div
+            host
+            = image_tag host_game_detail.hand.card_image, class: "card mx-4"
+          %div
+            guest
+            = image_tag guest_game_detail.hand.card_image, class: "card mx-4"

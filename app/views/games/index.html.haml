@@ -1,6 +1,2 @@
-%h1 Listing games
-#users
-  - @games.each do |game|
-    = render 'game', game: game
-
-= link_to 'New Game', new_game_path
+#home
+  = button_to 'リアルタイム対戦', games_path, method: :post, class: 'btn btn-primary'

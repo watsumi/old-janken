@@ -1,0 +1,62 @@
+.game{
+  /* Full height */
+  height: 800px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #212121;
+  background-size: contain;
+  &.sand-capital-morning{
+    background-image: url('fields/sand-capital-morning.png');
+  }
+  &.sand-capital-evening{
+    background-image: url('fields/sand-capital-evening.png');
+  }
+  &.sand-capital-night{
+    background-image: url('fields/sand-capital-night.png');
+  }
+  &.water-village-morning{
+    background-image: url('fields/water-village-morning.png');
+  }
+  &.water-village-evening{
+    background-image: url('fields/water-village-evening.png');
+  }
+  &.water-village-night{
+    background-image: url('fields/water-village-night.png');
+  }
+  &.grasslands-morning{
+    background-image: url('fields/grasslands-morning.png');
+  }
+  &.grasslands-evening{
+    background-image: url('fields/grasslands-evening.png');
+  }
+  &.grasslands-night{
+    background-image: url('fields/grasslands-night.png');
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.enemy-card {
+  -webkit-transform: rotate(180deg);
+  -moz-transform   : rotate(180deg);
+  transform        : rotate(180deg);
+  &.non-character-card {
+    pointer-events: none;
+  }
+}
+
+.offcanvas-body {
+  ul{
+    list-style: none;
+    li{
+      margin-left: 8px;
+      line-height: 32px;
+    }
+    li:hover{
+      background-color: #e9ecef;
+    }
+  }
+}

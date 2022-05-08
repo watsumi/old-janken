@@ -1,0 +1,27 @@
+:ruby
+  if card_role.attributes.has_key?("support_id")
+    edit_path = edit_user_support_path(card_role, game_id: @game.id)
+  elsif card_role.attributes.has_key?("hand_id")
+    edit_path = edit_user_hand_path(card_role, game_id: @game.id)
+  else
+    edit_path = edit_user_path(card_role)
+  end
+
+- if !card_role.attributes.has_key?("character_id") && is_enemy?(card_role.user)
+  = image_tag 'cards/card-back', class: 'card mx-4 enemy-card non-character-card'
+
+- elsif card_role.attributes.has_key?("character_id") && is_enemy?(card_role)
+  = link_to edit_path, data: { turbo_frame: "modal" } do
+    = image_tag card_role.character.card_image, class: "card mx-4 enemy-card"
+
+- elsif card_role.attributes.has_key?("character_id")
+  = link_to edit_path, data: { turbo_frame: "modal" } do
+    = image_tag card_role.character.card_image, class: "card mx-4"
+
+- elsif card_role.attributes.has_key?("support_id")
+  = link_to edit_path, data: { turbo_frame: "modal" } do
+    = image_tag card_role.support.card_image, class: "card mx-4"
+
+- elsif card_role.attributes.has_key?("hand_id")
+  = link_to edit_path, data: { turbo_frame: "modal" } do
+    = image_tag card_role.hand.card_image, class: "card mx-4"
