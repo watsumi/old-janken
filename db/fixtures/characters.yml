@@ -1,12 +1,15 @@
 - id: 1
+  type: 'character'
   name: ヒポグリフ
-  description: 通常出せるカードは、rock(グー)、scissors（チョキ）のみ。
+  description: 通常出せるカードは、rock(グー)、scissors（チョキ）のみ。フィールドが砂の都の場合、じゃんけんに勝利したときに得られる得点が2点になる。時刻が夕方の場合、じゃんけんに負けたときに減点される得点が2点になる。
   card_image: 'cards/hippogriff'
 - id: 2
+  type: 'character'
   name: ユバの民
-  description: 通常出せるカードは、scissors（チョキ）、paper（パー）のみ。
+  description: 通常出せるカードは、scissors（チョキ）、paper（パー）のみ。フィールドが水の村の場合、じゃんけんに勝利したときに得られる得点が2点になる。時刻が夜の場合、じゃんけんに負けたときに減点される得点が2点になる。
   card_image: 'cards/yuba'
 - id: 3
+  type: 'character'
   name: カーバンクル
-  description: 通常出せるカードは、paper（パー）、rock(グー)のみ。
+  description: 通常出せるカードは、paper（パー）、rock(グー)のみ。フィールドが風の街の場合、じゃんけんに勝利したときに得られる得点が2点になる。時刻が朝の場合、じゃんけんに負けたときに減点される得点が2点になる。
   card_image: 'cards/carbuncle'

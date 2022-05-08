@@ -1,36 +1,45 @@
 - id: 1
+  type: 'field'
   name: 砂の都（朝）
-  description: ヒポグリフが勝利した場合は、加算される点数は2点になる。カーバンクルが負けた場合は、引かれる点数は2点になる。
+  description: ヒポグリフが勝利した場合は、加算される点数は2点になる。カーバンクルが負けた場合は、減算される点数は2点になる。
   card_image: 'sand-capital-morning'
 - id: 2
+  type: 'field'
   name: 砂の都（夕）
-  description: ヒポグリフが勝利した場合は、加算される点数は2点になる。ヒポグリフが負けた場合は、引かれる点数は2点になる。
+  description: ヒポグリフが勝利した場合は、加算される点数は2点になる。ヒポグリフが負けた場合は、減算される点数は2点になる。
   card_image: 'sand-capital-evening'
 - id: 3
+  type: 'field'
   name: 砂の都（夜）
-  description: ヒポグリフが勝利した場合は、加算される点数は2点になる。ユバの民が負けた場合は、引かれる点数は2点になる。
+  description: ヒポグリフが勝利した場合は、加算される点数は2点になる。ユバの民が負けた場合は、減算される点数は2点になる。
   card_image: 'sand-capital-night'
 - id: 4
+  type: 'field'
   name: 水の村（朝）
-  description: ユバの民が勝利した場合は、加算される点数は2点になる。カーバンクルが負けた場合は、引かれる点数は2点になる。
+  description: ユバの民が勝利した場合は、加算される点数は2点になる。カーバンクルが負けた場合は、減算される点数は2点になる。
   card_image: 'water-village-morning'
 - id: 5
+  type: 'field'
   name: 水の村（夕）
-  description: ユバの民が勝利した場合は、加算される点数は2点になる。ヒポグリフが負けた場合は、引かれる点数は2点になる。
+  description: ユバの民が勝利した場合は、加算される点数は2点になる。ヒポグリフが負けた場合は、減算される点数は2点になる。
   card_image: 'water-village-evening'
 - id: 6
+  type: 'field'
   name: 水の村（夜）
-  description: ユバの民が勝利した場合は、加算される点数は2点になる。ユバの民が負けた場合は、引かれる点数は2点になる。
+  description: ユバの民が勝利した場合は、加算される点数は2点になる。ユバの民が負けた場合は、減算される点数は2点になる。
   card_image: 'water-village-night'
 - id: 7
+  type: 'field'
   name: 風の街（朝）
-  description: カーバンクルが勝利した場合は、加算される点数は2点になる。カーバンクルが負けた場合は、引かれる点数は2点になる。
+  description: カーバンクルが勝利した場合は、加算される点数は2点になる。カーバンクルが負けた場合は、減算される点数は2点になる。
   card_image: 'grasslands-morning'
 - id: 8
+  type: 'field'
   name: 風の街（夕）
-  description: カーバンクルが勝利した場合は、加算される点数は2点になる。ヒポグリフが負けた場合は、引かれる点数は2点になる。
+  description: カーバンクルが勝利した場合は、加算される点数は2点になる。ヒポグリフが負けた場合は、減算される点数は2点になる。
   card_image: 'grasslands-evening'
 - id: 9
+  type: 'field'
   name: 風の街（夜）
-  description: カーバンクルが勝利した場合は、加算される点数は2点になる。ユバの民が負けた場合は、引かれる点数は2点になる。
+  description: カーバンクルが勝利した場合は、加算される点数は2点になる。ユバの民が負けた場合は、減算される点数は2点になる。
   card_image: 'grasslands-night'
