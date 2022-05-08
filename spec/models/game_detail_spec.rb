@@ -3,18 +3,24 @@
 # Table name: game_details
 #
 #  id          :bigint           not null, primary key
-#  round_score :integer          default(0), not null
+#  round_score :integer
+#  turn        :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  game_id     :string           default("0"), not null
-#  hand_id     :integer          default(0), not null
-#  request_id  :integer          default(0), not null
-#  support_id  :integer          default(0), not null
-#  user_id     :string           default("0"), not null
+#  game_id     :uuid
+#  hand_id     :integer
+#  support_id  :integer
+#  user_id     :uuid
 #
 # Indexes
 #
-#  index_game_details_on_user_id_and_game_id  (user_id,game_id)
+#  index_game_details_on_game_id  (game_id)
+#  index_game_details_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (game_id => games.id)
+#  fk_rails_...  (user_id => users.id)
 #
 require 'rails_helper'
 

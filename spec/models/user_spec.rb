@@ -9,7 +9,6 @@
 #  updated_at        :datetime         not null
 #  character_id      :integer          not null
 #  game_id           :string           not null
-#  support_id        :string           not null
 #
 # Indexes
 #
@@ -85,6 +84,21 @@ RSpec.describe User, type: :model do
         subject
         expect(user.user_hands.first.hand_id).to eq('1').or eq('2')
       end
+    end
+  end
+
+  describe '#set_support!' do
+    let!(:user) do
+      create(:user, game:,
+                    role: :host,
+                    character_id: 1)
+    end
+
+    subject { user.set_support! }
+
+    it 'サポートカードが紐づくこと' do
+      subject
+      expect(user.user_supports.support_id).to eq('1').or eq('2').or eq('3')
     end
   end
 end

@@ -9,7 +9,6 @@
 #  updated_at        :datetime         not null
 #  character_id      :integer          not null
 #  game_id           :string           not null
-#  support_id        :string           not null
 #
 # Indexes
 #
