@@ -2,14 +2,14 @@
   type: 'support'
   name: 幸運の妖精チリムとチェリム
   description: 自分の手札を1枚、無作為に別のカードに変更することができる。
-  card_image: 'cards/chilim_chelim'
+  card_image: 'cards/chilim_chelim.png'
 - id: 2
   type: 'support'
   name: マダガルザウルス
   description: 自分の手札のカードを1枚、無作為に相手の手札のカードと入れ替える。
-  card_image: 'cards/madagarusaurus'
+  card_image: 'cards/madagarusaurus.png'
 - id: 3
   type: 'support'
   name: 廃墟の魔女
   description: 一度だけフィールドを無作為に変えることができる。
-  card_image: 'cards/witch'
+  card_image: 'cards/witch.png'

@@ -8,7 +8,7 @@
   end
 
 - if !card_role.attributes.has_key?("character_id") && is_enemy?(card_role.user)
-  = image_tag 'cards/card-back', class: 'card mx-4 enemy-card non-character-card'
+  = image_tag 'cards/card-back.png', class: 'card mx-4 enemy-card non-character-card'
 
 - elsif card_role.attributes.has_key?("character_id") && is_enemy?(card_role)
   = link_to edit_path, data: { turbo_frame: "modal" } do

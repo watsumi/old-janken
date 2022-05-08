@@ -2,14 +2,14 @@
   type: 'hand'
   name: rock
   description: グー
-  card_image: 'cards/rock'
+  card_image: 'cards/rock.png'
 - id: 2
   type: 'hand'
   name: paper
   description: パー
-  card_image: 'cards/paper'
+  card_image: 'cards/paper.png'
 - id: 3
   type: 'hand'
   name: scissors
   description: チョキ
-  card_image: 'cards/scissors'
+  card_image: 'cards/scissors.png'
