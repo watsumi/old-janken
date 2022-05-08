@@ -23,6 +23,9 @@
         %li.m-3
           = link_to privacy_policy_path, class: 'text-black' do
             %i.bi.bi-shield-fill-check &nbsp;&nbsp;&nbsp;プライバシーポリシー
+        %li.m-3
+          = link_to "https://twitter.com/old_janken", class: 'text-black', target: :_blank, rel: "noopener noreferrer" do
+            %i.bi.bi-twitter &nbsp;&nbsp;&nbsp;問い合わせ
       - elsif is_game_page?
         %li.m-3
           = link_to game_path(@game), class: 'text-black' do
