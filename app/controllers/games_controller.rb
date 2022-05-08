@@ -1,78 +1,48 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show host guest spectator]
+  skip_before_action :require_login, only: %i[ index create paticipate ]
+  before_action :set_game, only: %i[ show destroy paticipate ]
 
   # GET /games
   def index
-    @games = Game.all
   end
 
   # GET /games/1
   def show
-    @host = @game.host
-    @guest = @game.guest
-
-    if @host.authenticated?(session)
-      redirect_to action: :host, id: @game.id
-      return
-    end
-
-    if @guest.authenticated?(session)
-      redirect_to action: :guest, id: @game.id
-      nil
-    end
   end
 
   # POST /games
   def create
-    game = Game.new(
-      field_id: Field.all.sample.id,
-    )
-    host = game.users.build(
-      role: :host,
-      character_id: Character.all.sample.id,
-      support_id: Support.all.sample.id,
-    )
-    guest = game.users.build(
-      role: :guest,
-      character_id: Character.all.sample.id,
-      support_id: Support.all.sample.id,
-    )
-
-    host.set_user_token
-    game.save!
-    3.times do
-      host.set_hand!(host.character.name)
-      guest.set_hand!(guest.character.name)
+    Game.transaction do
+      respond_to do |format|
+        @game = Game.new(field: Field.all.sample)
+        host = @game.users.build(role: :host, character: Character.all.sample)
+        guest = @game.users.build(role: :guest, character: Character.all.sample)
+        host.set_user_token
+        
+        if @game.create_game_and_set_user_cards!
+          remember(host)
+          format.html { redirect_to @game, notice: "Game was successfully created." }
+          format.json { render :show, status: :ok, location: @game }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
+      end
     end
-    remember(host)
-
-    redirect_to action: :host, id: game.id
   end
 
-  def host
-    @account = @game.host
-    @enemy = @game.guest
-
-    redirect_to action: :show unless @account.authenticated?(session)
+  # DELETE /games/1
+  def destroy
+    @game.destroy
+    redirect_to games_url, notice: "Game was successfully destroyed."
   end
 
-  def guest
-    @account = @game.guest
-    @enemy = @game.host
-
-    redirect_to action: :show unless @account.authenticated?(session)
-  end
-
-  def spectator
-    @account = @game.spectator
-    @host = @game.host
-    @guest = @game.guest
-  end
+  def paticipate; end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_game
-    @game = Game.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_game
+      @game = Game.find(params[:id])
+      @host = @game.host
+      @guest = @game.guest
+    end
 end
