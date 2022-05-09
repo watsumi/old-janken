@@ -1,13 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe '/games', type: :request do
-  describe 'POST create' do
-    context '実行したとき' do
-      it 'redirect' do
-        post '/games'
-        game = Game.first
-        expect(response).to redirect_to("/games/#{game.id}/host")
-      end
+  describe 'GET /index' do
+    it 'renders a successful response' do
+      get root_path
+      expect(response).to be_successful
     end
   end
 end

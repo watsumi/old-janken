@@ -16,7 +16,6 @@
 #
 FactoryBot.define do
   factory :user do
-    sequence(:character_id) { rand(1..3) }
-    sequence(:support_id) { rand(1..3) }
+    sequence(:character_id) { 1 }
   end
 end

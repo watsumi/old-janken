@@ -31,11 +31,11 @@ class GameDetail < ApplicationRecord
   belongs_to_active_hash :support, class_name: 'Support', inverse_of: :game_details
 
   enum turn: {
-    host_turn_1:  1,
+    host_turn_1: 1,
     guest_turn_1: 2,
-    host_turn_2:  3,
+    host_turn_2: 3,
     guest_turn_2: 4,
-    host_turn_3:  5,
+    host_turn_3: 5,
     guest_turn_3: 6,
     finished: 7,
   }
@@ -51,5 +51,4 @@ class GameDetail < ApplicationRecord
   def round_num
     "Round #{turn.gsub(/(ho|gue)st_turn_/, '')}"
   end
-
 end

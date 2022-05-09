@@ -19,6 +19,6 @@
 #
 FactoryBot.define do
   factory :user_hand do
-    
+    hand_id { 1 }
   end
 end
