@@ -14,33 +14,33 @@ RSpec.describe Game, type: :model do
   include ActionView::RecordIdentifier
 
   let!(:game)  { create(:game) }
-  let!(:host)  { create(:user, game: game, role: :host) }
-  let!(:guest) { create(:user, game: game, role: :guest) }
+  let!(:host)  { create(:user, game:, role: :host) }
+  let!(:guest) { create(:user, game:, role: :guest) }
   let(:game_details) do
-    create_list(:game_detail, 3, game: game, user: host)
-    create_list(:game_detail, 3, game: game, user: guest)
+    create_list(:game_detail, 3, game:, user: host)
+    create_list(:game_detail, 3, game:, user: guest)
   end
 
   describe '#notify_to_game(message)' do
     let(:message) { 'メッセージの送信確認' }
     subject { game.notify_to_game(message) }
 
-    context "送信成功" do
-      it "1通のメッセージが送信されること" do
-        expect { subject }.to have_broadcasted_to(dom_id(game, "flashes")).exactly(:once)
+    context '送信成功' do
+      it '1通のメッセージが送信されること' do
+        expect { subject }.to have_broadcasted_to(dom_id(game, 'flashes')).exactly(:once)
       end
     end
   end
 
   describe '#show_detail_modal_to_game(host_game_detail, guest_game_detail)' do
-    let(:host_game_detail) { create(:game_detail, game: game, user: host) }
-    let(:guest_game_detail) { create(:game_detail, game: game, user: guest) }
+    let(:host_game_detail) { create(:game_detail, game:, user: host) }
+    let(:guest_game_detail) { create(:game_detail, game:, user: guest) }
 
     subject { game.show_detail_modal_to_game(host_game_detail, guest_game_detail) }
 
-    context "送信成功" do
-      it "1度リクエストが送信されること" do
-        expect { subject }.to have_broadcasted_to(dom_id(game, "detail")).exactly(:once)
+    context '送信成功' do
+      it '1度リクエストが送信されること' do
+        expect { subject }.to have_broadcasted_to(dom_id(game, 'detail')).exactly(:once)
       end
     end
   end
@@ -48,16 +48,16 @@ RSpec.describe Game, type: :model do
   describe '#show_finish_modal_to_game(game_details)' do
     subject { game.show_finish_modal_to_game(game_details) }
 
-    context "送信成功" do
-      it "1度リクエストが送信されること" do
-        expect { subject }.to have_broadcasted_to(dom_id(game, "finish")).exactly(:once)
+    context '送信成功' do
+      it '1度リクエストが送信されること' do
+        expect { subject }.to have_broadcasted_to(dom_id(game, 'finish')).exactly(:once)
       end
     end
   end
 
   describe '#winner_role' do
     subject { game.winner_role }
-    
+
     context 'hostが勝利した場合' do
       before do
         game.update!(winner: host.id)
@@ -71,7 +71,7 @@ RSpec.describe Game, type: :model do
     let!(:game_1) { build(:game) }
 
     subject { game_1.create_game_and_set_user_cards! }
-    
+
     context '正常系' do
       before do
         @host_user = game_1.users.build(role: :host, character_id: 1)
@@ -79,11 +79,11 @@ RSpec.describe Game, type: :model do
       end
 
       it 'userに手札がセットされ、game_detailが1件作成されること' do
-        expect {
-          expect {
+        expect do
+          expect do
             expect { subject }.to change { @host_user.user_hands.size }.from(0).to(3)
-          }.to change { @guest_user.user_hands.size }.from(0).to(3)
-        }.to change { game_1.game_details.size }.from(0).to(1)
+          end.to change { @guest_user.user_hands.size }.from(0).to(3)
+        end.to change { game_1.game_details.size }.from(0).to(1)
       end
     end
   end
@@ -113,8 +113,8 @@ RSpec.describe Game, type: :model do
         it 'game_detailが1件新たに作成され、round_scoreが更新されること' do
           subject
 
-          host_round_score = game_2.game_details.third_to_last().round_score
-          guest_round_score = game_2.game_details.second_to_last().round_score
+          host_round_score = game_2.game_details.third_to_last.round_score
+          guest_round_score = game_2.game_details.second_to_last.round_score
 
           expect(host_round_score).to eq(-1)
           expect(guest_round_score).to eq(2)

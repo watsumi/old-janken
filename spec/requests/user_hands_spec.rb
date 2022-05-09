@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "UserHands", type: :request do
+RSpec.describe 'UserHands', type: :request do
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Statics", type: :request do
+RSpec.describe 'Statics', type: :request do
   describe 'GET /credit' do
     it 'renders a successful response' do
       get credits_path

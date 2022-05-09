@@ -13,21 +13,22 @@ class UserSupportsController < ApplicationController
     notice = "#{@user_support.user.role}が#{@user_support.support.name}を使用しました"
     respond_to do |format|
       format.turbo_stream {}
-      format.html { redirect_to @user_support, notice: notice }
+      format.html { redirect_to @user_support, notice: }
     end
 
     @game.notify_to_game(notice)
   end
 
   private
-    def set_game_variables
-      @user_support = UserSupport.find(params[:id])
-      @game = Game.find(params[:game_id])
-      @user = @user_support.user
-    end
 
-    def apply_support!
-      @game.game_details.last.update!(support_id: @user_support.support.id)
-      @user.update_by_support_card!(@user_support.support.id)
-    end
+  def set_game_variables
+    @user_support = UserSupport.find(params[:id])
+    @game = Game.find(params[:game_id])
+    @user = @user_support.user
+  end
+
+  def apply_support!
+    @game.game_details.last.update!(support_id: @user_support.support.id)
+    @user.update_by_support_card!(@user_support.support.id)
+  end
 end

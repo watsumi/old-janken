@@ -29,7 +29,7 @@ module ApplicationHelper
         card: 'summary_large_image',
         site: '@old-janken',
         image: "#{root_url}ogp.png",
-      }
+      },
     }
   end
 
@@ -38,18 +38,18 @@ module ApplicationHelper
   end
 
   def icon(icon_name)
-    tag.i(class: ["bi", "bi-#{icon_name}"])
+    tag.i(class: ['bi', "bi-#{icon_name}"])
   end
 
   def icon_with_text(icon_name, text)
-    tag.span(icon(icon_name), class: "me-2") + tag.span(text)
+    tag.span(icon(icon_name), class: 'me-2') + tag.span(text)
   end
 
   def turbo_stream_flash
-    turbo_stream.append "flashes", partial: "flash"
+    turbo_stream.append 'flashes', partial: 'flash'
   end
 
   def turbo_stream_background
-    turbo_stream.replace "background", partial: "background"
+    turbo_stream.replace 'background', partial: 'background'
   end
 end

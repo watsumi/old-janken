@@ -29,7 +29,7 @@ class User < ApplicationRecord
     guest: 2,
     spectator: 3,
   }, _suffix: true
-  
+
   attr_accessor :user_token
 
   def authenticated?(session)
@@ -71,14 +71,15 @@ class User < ApplicationRecord
     user_hand_marshal = Marshal.load(Marshal.dump(user_hand)) # 破壊的変更があった場合にも、独立して値を保持できる
     enemy_hand_marshal = Marshal.load(Marshal.dump(enemy_hand))
 
-    if support_card_id.to_i == 1
+    case support_card_id.to_i
+    when 1
       hand_ids = Hand.all.pluck(:id)
       hand_ids.delete(user_hand_marshal.hand_id.to_i)
       UserHand.find(user_hand_marshal.id).update!(hand_id: hand_ids.sample)
-    elsif support_card_id.to_i == 2
+    when 2
       UserHand.find(user_hand_marshal.id).update!(hand_id: enemy_hand_marshal.hand_id)
       UserHand.find(enemy_hand_marshal.id).update!(hand_id: user_hand_marshal.hand_id)
-    elsif support_card_id.to_i == 3
+    when 3
       game.update!(field: Field.all.sample)
     end
   end
@@ -88,10 +89,8 @@ class User < ApplicationRecord
       true
     elsif user_hand == 2 && enemy_hand == 1
       true
-    elsif user_hand == 3 && enemy_hand == 2
-      true
     else
-      false
+      user_hand == 3 && enemy_hand == 2
     end
   end
 
@@ -99,11 +98,11 @@ class User < ApplicationRecord
     win_score = 1
     case character.id
     when 1
-      win_score = 2 if [1,2,3].include?(game.field.id)
+      win_score = 2 if [1, 2, 3].include?(game.field.id)
     when 2
-      win_score = 2 if [4,5,6].include?(game.field.id)
+      win_score = 2 if [4, 5, 6].include?(game.field.id)
     when 3
-      win_score = 2 if [7,8,9].include?(game.field.id)
+      win_score = 2 if [7, 8, 9].include?(game.field.id)
     end
     win_score
   end
@@ -112,23 +111,23 @@ class User < ApplicationRecord
     lose_score = 1
     case character.id
     when 1
-      lose_score = 2 if [2,5,8].include?(game.field.id)
+      lose_score = 2 if [2, 5, 8].include?(game.field.id)
     when 2
-      lose_score = 2 if [3,6,9].include?(game.field.id)
+      lose_score = 2 if [3, 6, 9].include?(game.field.id)
     when 3
-      lose_score = 2 if [1,4,7].include?(game.field.id)
+      lose_score = 2 if [1, 4, 7].include?(game.field.id)
     end
     lose_score
   end
 
   private
 
-    def generate_user_token
-      SecureRandom.urlsafe_base64
-    end
+  def generate_user_token
+    SecureRandom.urlsafe_base64
+  end
 
-    def generate_user_token_digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-      BCrypt::Password.create(string, cost:)
-    end
+  def generate_user_token_digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost:)
+  end
 end

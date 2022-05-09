@@ -1,9 +1,9 @@
 class UserHandsController < ApplicationController
-  before_action :set_user_hand, only: %i[ show edit destroy ]
-  before_action :set_game, only: %i[ show edit destroy ]
+  before_action :set_user_hand, only: %i[show edit destroy]
+  before_action :set_game, only: %i[show edit destroy]
 
   def show
-    if request.headers["turbo-frame"]
+    if request.headers['turbo-frame']
       render partial: 'user_hand', locals: { user_hand: @user_hand }
     else
       render 'show'
@@ -25,23 +25,24 @@ class UserHandsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream {}
-      format.html { redirect_to @user_hand, notice: notice }
+      format.html { redirect_to @user_hand, notice: }
     end
 
     @game.notify_to_game(notice)
   end
 
   private
-    def set_user_hand
-      @user_hand = UserHand.find(params[:id])
-    end
 
-    def set_game
-      @game = @user_hand.user.game
-    end
+  def set_user_hand
+    @user_hand = UserHand.find(params[:id])
+  end
 
-    def turn_change!
-      @game.game_details.last.update!(hand_id: @user_hand.hand.id)
-      @game.turn_end!
-    end
+  def set_game
+    @game = @user_hand.user.game
+  end
+
+  def turn_change!
+    @game.game_details.last.update!(hand_id: @user_hand.hand.id)
+    @game.turn_end!
+  end
 end
