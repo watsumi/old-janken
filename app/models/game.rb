@@ -87,7 +87,7 @@ class Game < ApplicationRecord
     guest_game_details = game_details.where(user_id: guest.id)
 
     winner = decide_winner(host_game_details:, guest_game_details:)
-    update!(winner: host.id)
+    update!(winner:)
     show_finish_modal_to_game(GameDetail.where(game_id: id).order(:created_at).limit(6))
   end
 

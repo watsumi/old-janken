@@ -65,6 +65,22 @@ RSpec.describe Game, type: :model do
 
       it { expect(subject).to eq('hostの勝利です！') }
     end
+
+    context 'guestが勝利した場合' do
+      before do
+        game.update!(winner: guest.id)
+      end
+
+      it { expect(subject).to eq('guestの勝利です！') }
+    end
+
+    context '引き分けの場合' do
+      before do
+        game.update!(winner: 0)
+      end
+
+      it { expect(subject).to eq('引き分けです。') }
+    end
   end
 
   describe '#create_game_and_set_user_cards!' do
@@ -134,6 +150,43 @@ RSpec.describe Game, type: :model do
       it '#game_judge!メソッドが呼ばれること' do
         subject
         expect(game_2).to have_received(:game_judge!).once
+      end
+    end
+  end
+
+  describe '#game_judge!' do
+    subject { game.game_judge! }
+
+    let!(:game_details) do
+      create_list(:game_detail, 3, game:, user: host, round_score: host_round_score)
+      create_list(:game_detail, 3, game:, user: guest, round_score: guest_round_score)
+    end
+
+    context 'hostの勝利の場合' do
+      let(:host_round_score) { 2 }
+      let(:guest_round_score) { -2 }
+
+      it 'gameのwinnerがhostになること' do
+        expect { subject }.to change { game.winner }.from(nil).to(host.id)
+      end
+    end
+
+    context 'guestの勝利の場合' do
+      let(:host_round_score) { -2 }
+      let(:guest_round_score) { 2 }
+
+      it 'gameのwinnerがguestになること' do
+        expect { subject }.to change { game.winner }.from(nil).to(guest.id)
+      end
+    end
+
+    context '引き分けの場合' do
+      let(:host_round_score) { 2 }
+      let(:guest_round_score) { 2 }
+
+      it 'gameのwinnerが0になること' do
+        subject
+        expect(game.winner).to eq('0')
       end
     end
   end
