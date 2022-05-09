@@ -3,7 +3,7 @@
 # Table name: games
 #
 #  id         :uuid             not null, primary key
-#  winner     :integer
+#  winner     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  field_id   :integer          default(1), not null
@@ -84,7 +84,7 @@ class Game < ApplicationRecord
     guest_game_details = game_details.where(user_id: guest.id)
 
     winner = decide_winner(host_game_details:, guest_game_details:)
-    update!(winner: winner)
+    update!(winner: host.id)
     show_finish_modal_to_game(GameDetail.where(game_id: id).order(:created_at).limit(6))
   end
 
@@ -112,8 +112,8 @@ class Game < ApplicationRecord
       host_game_detail.round_score += host_win_score
       guest_game_detail.round_score -= guest_lose_score
     elsif guest.win?(user_hand: guest_game_detail.hand_id, enemy_hand: host_game_detail.hand_id)
-      guest_game_detail.round_score = guest_win_score
-      host_game_detail.round_score = host_lose_score
+      guest_game_detail.round_score += guest_win_score
+      host_game_detail.round_score -= host_lose_score
     end
   end
 

@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
 
   create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "field_id", default: 1, null: false
-    t.integer "winner"
+    t.string "winner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

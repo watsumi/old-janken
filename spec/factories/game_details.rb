@@ -24,5 +24,8 @@
 #
 FactoryBot.define do
   factory :game_detail do
+    turn { 1 }
+    hand_id { 1 }
+    support_id { 1 }
   end
 end

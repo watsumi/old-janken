@@ -19,6 +19,6 @@
 #
 FactoryBot.define do
   factory :user_support do
-    
+    support_id { 1 }
   end
 end

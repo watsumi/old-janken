@@ -68,21 +68,21 @@ RSpec.describe User, type: :model do
       let(:character) { hippogriff }
       it 'グーまたはチョキが選ばれること' do
         subject
-        expect(user.user_hands.first.hand_id).to eq('1').or eq('3')
+        expect(user.user_hands.first.hand_id).to eq(1).or eq(3)
       end
     end
     context 'ユバのとき' do
       let(:character) { yuba }
       it 'グーまたはチョキが選ばれること' do
         subject
-        expect(user.user_hands.first.hand_id).to eq('2').or eq('3')
+        expect(user.user_hands.first.hand_id).to eq(2).or eq(3)
       end
     end
     context 'カーバンクルのとき' do
       let(:character) { carbuncle }
       it 'グーまたはチョキが選ばれること' do
         subject
-        expect(user.user_hands.first.hand_id).to eq('1').or eq('2')
+        expect(user.user_hands.first.hand_id).to eq(1).or eq(2)
       end
     end
   end
@@ -98,7 +98,7 @@ RSpec.describe User, type: :model do
 
     it 'サポートカードが紐づくこと' do
       subject
-      expect(user.user_supports.support_id).to eq('1').or eq('2').or eq('3')
+      expect(user.user_supports.take.support_id).to eq(1).or eq(2).or eq(3)
     end
   end
 end
