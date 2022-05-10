@@ -5,7 +5,7 @@ module ApplicationHelper
       title: '旧約じゃんけん',
       reverse: true,
       charset: 'utf-8',
-      description: 'じゃんけんゲーム。ただし、旧約の方。',
+      description: 'ルールがちょっと複雑なじゃんけんゲーム。',
       keywords: '旧約じゃんけん,old-janken',
       canonical: request.original_url,
       separator: '|',
