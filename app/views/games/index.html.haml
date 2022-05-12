@@ -1,5 +1,5 @@
 #home
   = button_to 'リアルタイム対戦', games_path, method: :post, class: 'btn btn-primary w-200'
   .card.p-0.bg-secondary.mt-5.w-25
-    = link_to rules_path, class: 'btn btn-secondary' do
+    = link_to rules_path, class: 'btn btn-secondary', data: { turbo_frame: "fullscreen_modal" } do
       ルール確認
