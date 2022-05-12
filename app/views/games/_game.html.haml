@@ -14,4 +14,5 @@
 
 %button.btn.btn-light.position-fixed.top-0.end-0.m-3{ type: "button", 'data-bs-toggle': "offcanvas", 'data-bs-target': "#offcanvas", 'aria-controls': "offcanvasExample" }
   %i.bi.bi-list
-= render 'paticipates'
+- if current_user == @host
+  = render 'paticipates'
