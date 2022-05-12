@@ -37,10 +37,6 @@ class GamesController < ApplicationController
 
   def paticipates; end
 
-  def rule; end
-
-  def rule; end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.

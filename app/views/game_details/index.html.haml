@@ -1,10 +1,4 @@
-= render "background" do
-  - if @game_details.size > 1
-    - if @game_details.size.odd?
-      = render partial: "finish_modal", locals: { game_details: @game_details }
-    - else
-      = render 'flash', message: 'guestのターン中は表示できません。'
-  - else
-    = render 'flash', message: '表示する結果が見つかりませんでした。'
-
-  = link_to 'ゲームに戻る', game_path(@game), class: 'position-absolute bottom-50 btn btn-primary w-25'
+- if @game_details.size > 1 && @game_details.size.odd?
+  = render partial: "finish_modal", locals: { game_details: @game_details }
+- else
+  = render 'flash', message: 'guestのターン中は表示できません。'

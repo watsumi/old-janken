@@ -14,7 +14,10 @@
   %body
     %main
       = yield
+    = turbo_frame_tag "flash"
     = turbo_frame_tag "modal"
+    = turbo_frame_tag "finish_modal"
+    = turbo_frame_tag "fullscreen_modal"
     = render 'offcanvas'
     %button.btn.btn-light.position-fixed.top-0.end-0.m-3{ type: "button", 'data-bs-toggle': "offcanvas", 'data-bs-target': "#offcanvas", 'aria-controls': "offcanvasExample" }
       %i.bi.bi-list
