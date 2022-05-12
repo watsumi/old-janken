@@ -4,7 +4,7 @@
       .modal-header
         %h5.modal-title 対戦相手を募集
         %button.btn-close{ type:"button", data: { 'bs-dismiss': "modal" }, 'aria-label': "Close"}
-      .modal-body.overflow-scroll
+      .modal-body.overflow-scroll.paticipates
         %ul
           %li.m-3
             = link_to "https://twitter.com/intent/tweet?text=対戦相手募集中！%0A#{request.url}/paticipates/%0A&hashtags=旧約じゃんけん,クソアプリWeek&via=old_janken", target: :_blank, rel: "noopener noreferrer" do
