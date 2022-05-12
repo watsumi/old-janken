@@ -48,7 +48,7 @@ a {
   }
 }
 
-.offcanvas-body {
+.offcanvas-body, .modal-body.overflow-scroll  {
   ul{
     list-style: none;
     li{
