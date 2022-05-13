@@ -14,11 +14,4 @@ RSpec.describe 'GameDetails', type: :request do
       expect(response).to be_successful
     end
   end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      get game_detail_path(game_detail, game_id: game.id)
-      expect(response).to be_successful
-    end
-  end
 end
