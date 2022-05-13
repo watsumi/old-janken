@@ -40,5 +40,6 @@
       %li.m-3
         = link_to "https://twitter.com/old_janken", class: 'text-black', target: :_blank, rel: "noopener noreferrer" do
           %i.bi.bi-twitter &nbsp;&nbsp;&nbsp;問い合わせ
-      .m-3
-        = audio_tag("game_music.mp3", autoplay: true, controls: true, loop: true, data: {turbo: 'permanent'})
+      - if is_game_page?
+        .m-3
+          = audio_tag("game_music.mp3", autoplay: true, controls: true, loop: true, data: {turbo: 'permanent'})
