@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'GameDetails', type: :request do
   let(:game) { create(:game) }
-  let(:game_detail) { create_list(:game_detail, 6, game:, user:) }
+  let!(:game_detail) { create_list(:game_detail, 6, game:, user:) }
   let(:user) { create(:user, game:, role: :host) }
   before do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
