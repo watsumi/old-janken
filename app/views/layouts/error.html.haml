@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    = display_meta_tags(default_meta_tags)
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "no-cache", :name => "turbo-cache-control" }/
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    - if Rails.env.production?
+      = render 'layouts/google_analytics'
+  %body
+    %main
+      = yield
+    = turbo_frame_tag "flash"
+    = turbo_frame_tag "modal"
+    = turbo_frame_tag "finish_modal"
+    = turbo_frame_tag "fullscreen_modal"
