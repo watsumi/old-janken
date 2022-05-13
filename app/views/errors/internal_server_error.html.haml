@@ -1,0 +1,54 @@
+- set_meta_tags title: '500 Internal Server Error', noindex: true
+
+#notfound
+  .notfound
+    .notfound-404
+      %h1 500 Internal Server Error
+      %h2 サーバーエラーが発生しました。
+      %p サーバーの問題でお探しのページを表示できません。
+      %p 再度時間をおいてアクセスしてください。
+      .box.fadeUp
+        .delay-time03.box.fadeUp
+          = image_tag('settings.gif')
+
+:css
+  #notfound {
+    box-sizing: border-box;
+    max-width: 560px;
+    width: 100%;
+    padding-left: 160px;
+    line-height: 1.1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .fadeUp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation-name:fadeUpAnime;
+    animation-duration:0.5s;
+    animation-fill-mode:forwards;
+    opacity: 0;
+  }
+  @keyframes fadeUpAnime{
+    from {
+      opacity: 0;
+    transform: translateY(100px);
+    }
+
+    to {
+      opacity: 1;
+    transform: translateY(0);
+    }
+  }
+
+  .delay-time02{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 0.2s;
+  }
