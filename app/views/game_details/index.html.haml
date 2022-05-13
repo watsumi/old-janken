@@ -1,4 +1,4 @@
-- if @game_details.size.odd?
+- if @game_details.size == 1 || @game_details.size.even?
   = render partial: "finish_modal", locals: { game_details: @game_details }
 - else
   = render 'flash', message: 'guestのターン中は表示できません。'

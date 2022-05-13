@@ -1,3 +1,4 @@
+- set_meta_tags title: 'ゲームに参加', noindex: true
 #home
   - if !@game.guest.taken?
     = button_to 'ゲームに参加する', user_authorize_path(game_id: params[:id], user_id: @guest.id), method: :post, class: 'btn btn-primary'
