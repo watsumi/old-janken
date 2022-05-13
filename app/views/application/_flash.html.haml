@@ -1,8 +1,7 @@
-= turbo_frame_tag "finish_modal" do
-  - if defined?(message)
-    #flashes
-      .mb-2.toast.hide.border-default{ data: { controller: "toast" } }
-        .toast-body.d-flex.justify-content-between.text-default
-          %strong.me-auto
-            = icon_with_text("check-circle", message)
-          %button.btn-close{ data: { 'bs-dismiss': "toast" } }
+- if defined?(message)
+  #flashes
+    .mb-2.toast.hide.border-default{ data: { controller: "toast" } }
+      .toast-body.d-flex.justify-content-between.text-default
+        %strong.me-auto
+          = icon_with_text("check-circle", message)
+        %button.btn-close{ data: { 'bs-dismiss': "toast" } }

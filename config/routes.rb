@@ -14,6 +14,6 @@ Rails.application.routes.draw do
       resources :user_hands, only: %i[show edit destroy]
       resources :user_supports, only: %i[show edit destroy]
     end
-    resources :game_details, only: %i[index show]
+    resources :game_details, only: %i[index]
   end
 end

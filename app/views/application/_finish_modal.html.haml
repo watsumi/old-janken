@@ -5,7 +5,13 @@
         .modal-content
           .modal-header
             %h5.modal-title
-              ゲーム詳細
+              - if game_details.present?
+                - if game_details.last.game.game_details.last.finished?
+                  = game_details.last.game.winner_role
+                - else
+                  ゲーム詳細
+              - else
+                表示する結果が見つかりませんでした。
             %button.btn-close{ type:"button", data: { 'bs-dismiss': "modal" }, 'aria-label': "Close"}
           .modal-body.d-flex.justify-content-between.overflow-scroll
             = render game_details

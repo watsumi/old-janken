@@ -1,0 +1,54 @@
+- set_meta_tags title: 'お探しのページが見つかりません。', noindex: true
+
+#notfound
+  .notfound
+    .notfound-404
+      %h1 404 Not Found
+      %h2 お探しのページが見つかりません。
+      %p URLに誤りがあるか、お探しのページは移動もしくは削除された可能性があります。
+      .box.fadeUp
+        = link_to 'トップページに戻る', root_path, class: 'btn btn-secondary'
+        .delay-time03.box.fadeUp
+          = image_tag('ghost.gif')
+
+:css
+  #notfound {
+    box-sizing: border-box;
+    max-width: 560px;
+    width: 100%;
+    padding-left: 160px;
+    line-height: 1.1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .fadeUp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation-name:fadeUpAnime;
+    animation-duration:0.5s;
+    animation-fill-mode:forwards;
+    opacity: 0;
+  }
+  @keyframes fadeUpAnime{
+    from {
+      opacity: 0;
+    transform: translateY(100px);
+    }
+
+    to {
+      opacity: 1;
+    transform: translateY(0);
+    }
+  }
+
+  .delay-time02{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 0.2s;
+  }
