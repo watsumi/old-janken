@@ -14,6 +14,7 @@ users {
   game_id string
 }
 
+games ||--|{ fields: has_many
 games ||--|{ users: has_many
 games ||--|{ game_details: has_many
 games {
@@ -32,7 +33,6 @@ game_details {
   user_id string
 }
 
-fields ||--|{ games: has_many
 fields {
   id integer
   name string
