@@ -1,24 +1,74 @@
-# README
+# 旧約じゃんけん
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## ER図
+```mermaid
+erDiagram
+users ||--|{ user_hands: has_many
+users ||--|{ user_supports: has_many
+users {
+  id uuid
+  role integer
+  user_token_digest string
+  character_id integer
+  support_id integer
+  game_id string
+}
 
-Things you may want to cover:
+games ||--|{ users: has_many
+games ||--|{ game_details: has_many
+games {
+  id uuid
+  field_id integer
+  winner integer
+}
 
-* Ruby version
+game_details {
+  id uuid
+  hand_id integer
+  round_score integer
+  game_id string
+  request_id integer
+  support_id integer
+  user_id string
+}
 
-* System dependencies
+fields ||--|{ games: has_many
+fields {
+  id integer
+  name string
+  card_image string
+}
 
-* Configuration
+characters ||--|{ users: has_many
+characters {
+  id integer
+  name string
+  card_image string
+}
 
-* Database creation
+hands ||--|{ user_hands: has_many
+hands {
+  id integer
+  name string
+  card_image string
+}
 
-* Database initialization
+user_hands {
+  id integer
+  user_id string
+  hand_id integer
+}
 
-* How to run the test suite
+supports ||--|{ user_supports: has_many
+supports {
+  id integer
+  name string
+  card_image string
+}
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+user_supports {
+  id integer
+  user_id string
+  support_id integer
+}
+```
