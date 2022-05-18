@@ -11,7 +11,7 @@ users {
   user_token_digest string
   character_id integer
   support_id integer
-  game_id string
+  game_id uuid
 }
 
 games ||--|{ users: has_many
