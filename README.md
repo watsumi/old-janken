@@ -19,7 +19,7 @@ games ||--|{ game_details: has_many
 games {
   id uuid
   field_id integer
-  winner integer
+  winner string
 }
 
 game_details {
