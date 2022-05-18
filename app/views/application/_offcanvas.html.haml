@@ -7,11 +7,11 @@
       %li.m-3
         = link_to root_path, class: 'text-black' do
           %i.bi.bi-house-door-fill &nbsp;&nbsp;&nbsp;トップページ
-      - if ! is_game_page?
+      - if ! is_game_detail_page?
         %li.m-3
           = button_to games_path, method: :post, class: 'btn btn-default p-0' do
             %i.bi.bi-controller &nbsp;&nbsp;&nbsp;リアルタイム対戦
-      - if is_game_page?
+      - if is_game_detail_page?
         %li.m-3
           = link_to game_game_details_path(@game), class: 'text-black', data: { turbo_frame: "finish_modal" } do
             %i.bi.bi-ticket-detailed-fill &nbsp;&nbsp;&nbsp;ラウンド結果
@@ -40,6 +40,6 @@
       %li.m-3
         = link_to "https://twitter.com/old_janken", class: 'text-black', target: :_blank, rel: "noopener noreferrer" do
           %i.bi.bi-twitter &nbsp;&nbsp;&nbsp;問い合わせ
-      - if is_game_page?
+      - if is_game_detail_page?
         .m-3
           = audio_tag("game_music.mp3", autoplay: true, controls: true, loop: true, data: {turbo: 'permanent'})
