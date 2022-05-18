@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_18_154839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -56,15 +56,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_08_035825) do
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "user_token_digest"
     t.integer "role", null: false
-    t.string "game_id", null: false
     t.integer "character_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id", "role"], name: "index_users_on_game_id_and_role", unique: true
+    t.uuid "game_id"
+    t.index ["game_id"], name: "index_users_on_game_id"
   end
 
   add_foreign_key "game_details", "games"
   add_foreign_key "game_details", "users"
   add_foreign_key "user_hands", "users"
   add_foreign_key "user_supports", "users"
+  add_foreign_key "users", "games"
 end
