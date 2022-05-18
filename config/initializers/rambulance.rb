@@ -1,5 +1,4 @@
 Rambulance.setup do |config|
-
   # List of pairs of exception/corresponding http status. In Rails, the default
   # mappings are below:
   #
@@ -29,20 +28,19 @@ Rambulance.setup do |config|
   # If Rambulance receives an exception that is not listed here, it'll render
   # the internal server error template and return 500 as http status.
   config.rescue_responses = {
-    "ActiveRecord::RecordNotUnique" => :unprocessable_entity,
-    "CanCan::AccessDenied"          => :forbidden,
+    'ActiveRecord::RecordNotUnique' => :unprocessable_entity,
+    'CanCan::AccessDenied' => :forbidden,
     # "Pundit::NotAuthorizedError"    => :forbidden,
-    "YourCustomException"           => :not_found
+    'YourCustomException' => :not_found,
   }
 
   # The template name for the layout of the error pages. The default value is
   # 'error'. For example, if this value is set to "error_page", Rambulance uses
   # 'app/views/layout/error_page.html.erb' as a layout for all the error pages.
-  config.layout_name = "error"
+  config.layout_name = 'error'
 
   # The directory name to organize error page templates. The default value is
   # 'errors'. For example, if this value is set to "error_pages", Rambulance
   # uses e.g. 'app/views/error_pages/not_found.html.erb'.
-  config.view_path = "errors"
-
+  config.view_path = 'errors'
 end

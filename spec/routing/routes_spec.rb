@@ -6,7 +6,7 @@ RSpec.describe 'routing test', type: :routing do
   it 'GET /' do
     expect(get: '/').to route_to(
       controller: 'static',
-      action: 'index'
+      action: 'index',
     )
   end
   it 'GET /terms' do

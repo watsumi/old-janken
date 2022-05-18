@@ -5,7 +5,7 @@ RSpec.describe GamesController, type: :routing do
     it 'GET /games' do
       expect(get: '/games').to route_to(
         controller: 'games',
-        action: 'index'
+        action: 'index',
       )
     end
     it 'GET /games/1' do
