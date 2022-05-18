@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def is_game_detail_page?
-    !(current_page?(root_path) || current_page?(rules_path) || current_page?(terms_path) || current_page?(credits_path) || current_page?(privacy_policy_path) || current_page?(games_path) || current_page?(paticipates_game_path))
+    !(current_page?(root_path) || current_page?(rules_path) || current_page?(terms_path) || current_page?(credits_path) || current_page?(privacy_policy_path) || current_page?(games_path))
   end
 
   def icon(icon_name)
