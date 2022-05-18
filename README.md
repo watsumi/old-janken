@@ -3,8 +3,8 @@
 ## ER図
 ```mermaid
 erDiagram
-users ||--|{ user_hands: has_many
-users ||--|{ user_supports: has_many
+users |o--|{ user_hands: has_many
+users |o--|{ user_supports: has_many
 users {
   id uuid
   role integer
