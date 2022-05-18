@@ -21,22 +21,46 @@
   background-size: contain;
   @media only screen and (orientation:portrait){
     height: 600px;
+    .card_left {
+      height: 100px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transform: translateY(-50%);
+      margin-top:  auto;
+    }
+    .card_right {
+      height: 100px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transform: translateY(-5%);
+      margin-top:  auto;
+    }
   }
   @media only screen and (orientation:landscape){
     height: 800px;
-  }
-  form, .card {
-    height: 100px;
-    position: absolute;
-    top: 0;
-    bottom :0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top:  auto;
-    .card-body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .card_left {
+      height: 100px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 30%;
+      transform: translateX(-50%);
+      margin-top:  auto;
+    }
+    .card_right {
+      height: 100px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 70%;
+      transform: translateX(-50%);
+      margin-top:  auto;
     }
   }
 }
