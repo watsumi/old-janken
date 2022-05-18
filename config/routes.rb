@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'games#index'
+  root 'static#index'
   get '/terms', to: 'static#terms'
   get '/rules', to: 'static#rules'
   get '/credits', to: 'static#credits'
