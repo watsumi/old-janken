@@ -8,11 +8,15 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  character_id      :integer          not null
-#  game_id           :string           not null
+#  game_id           :uuid
 #
 # Indexes
 #
-#  index_users_on_game_id_and_role  (game_id,role) UNIQUE
+#  index_users_on_game_id  (game_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (game_id => games.id)
 #
 FactoryBot.define do
   factory :user do

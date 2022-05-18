@@ -1,0 +1,15 @@
+.carousel-item{class: "#{'active' if game_counter == 0}", style: "height: 800px"}
+  = render "background", game: game do
+    .d-flex.flex-column.justify-content-center
+      .d-flex.flex-row.justify-content-center
+        %h2.text-white ホスト
+      .d-flex.flex-row.justify-content-center
+        = image_tag game.host.character.card_image, class: "card mx-4"
+      .d-flex.flex-row.justify-content-center.mt-2
+        %h2.text-primary VS
+      .d-flex.flex-row.justify-content-center
+        = image_tag game.guest.character.card_image, class: "card mx-4"
+      .d-flex.flex-row.justify-content-center.mt-2
+        %h2.text-white ゲスト
+      .d-flex.flex-row.justify-content-center.mt-3
+        = button_to 'ゲームに参加する', user_authorize_path(game_id: game.id, user_id: game.guest.id), method: :post, class: 'btn btn-primary', data: { turbo: false }

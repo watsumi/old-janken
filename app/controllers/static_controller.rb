@@ -1,6 +1,8 @@
 class StaticController < ApplicationController
   skip_before_action :require_login
 
+  def index; end
+
   def rules
     @characters = Character.all
     @supports = Support.all

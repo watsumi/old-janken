@@ -3,7 +3,9 @@ class GamesController < ApplicationController
   before_action :set_game, only: %i[show destroy paticipates]
 
   # GET /games
-  def index; end
+  def index
+    @games = Game.open.limit(15)
+  end
 
   # GET /games/1
   def show; end
