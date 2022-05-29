@@ -49,6 +49,6 @@ class GameDetail < ApplicationRecord
   end
 
   def round_num
-    "Round #{turn.gsub(/(ho|gue)st_turn_/, '')}"
+    "Round #{turn.gsub(/(ho|gue)st_turn/, '')}"
   end
 end
