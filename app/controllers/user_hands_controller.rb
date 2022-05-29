@@ -16,7 +16,7 @@ class UserHandsController < ApplicationController
 
   def destroy
     @user_hand.destroy
-    if params[:cpu_game]
+    if params[:cpu_game] == 'true'
       cpu_turn_change!
       respond_to do |format|
         format.turbo_stream
@@ -30,7 +30,7 @@ class UserHandsController < ApplicationController
       end
     end
 
-    @game.notify_to_game(notice)
+    @game.notify_to_game(notice_next_turn)
   end
 
   private

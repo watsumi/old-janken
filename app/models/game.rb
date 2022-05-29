@@ -73,6 +73,7 @@ class Game < ApplicationRecord
   end
 
   def cpu_turn_activate!
+    sleep rand(1.0...1.5) unless Rails.env.test?
     apply_support_to_guest!(guest.user_supports.take) if guest.user_supports.present?
     select_guest_hand!
     turn_end!
