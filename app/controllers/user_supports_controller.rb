@@ -1,8 +1,6 @@
 class UserSupportsController < ApplicationController
   before_action :set_game_variables
 
-  def show; end
-
   def edit
     @card = @user_support.support
   end
@@ -13,7 +11,7 @@ class UserSupportsController < ApplicationController
     notice = "#{@user_support.user.role}が#{@user_support.support.name}を使用しました"
     respond_to do |format|
       format.turbo_stream {}
-      format.html { redirect_to @user_support, notice: }
+      format.html { redirect_to game_path(@game), notice: }
     end
 
     @game.notify_to_game(notice)
