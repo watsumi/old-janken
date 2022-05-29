@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'UserSupports', type: :request do
   let(:game) { create(:game) }
-  let(:host)  { create(:user, game: game, role: :host) }
-  let(:guest) { create(:user, game: game, role: :guest) }
-  let!(:host_support) { create(:user_support, user: host)}
-  let!(:host_hand) { create(:user_hand, user: host)}
-  let!(:guest_hand) { create(:user_hand, user: guest)}
+  let(:host)  { create(:user, game:, role: :host) }
+  let(:guest) { create(:user, game:, role: :guest) }
+  let!(:host_support) { create(:user_support, user: host) }
+  let!(:host_hand) { create(:user_hand, user: host) }
+  let!(:guest_hand) { create(:user_hand, user: guest) }
   let!(:game_details) do
-    create(:game_detail, game: game, user: host, hand_id: 1, turn: :host_turn_1)
-    create(:game_detail, game: game, user: guest, hand_id: 2, turn: :guest_turn_1)
-    create(:game_detail, game: game, user: host, hand_id: 1, turn: :host_turn_2)
+    create(:game_detail, game:, user: host, hand_id: 1, turn: :host_turn_1)
+    create(:game_detail, game:, user: guest, hand_id: 2, turn: :guest_turn_1)
+    create(:game_detail, game:, user: host, hand_id: 1, turn: :host_turn_2)
   end
 
   before { login_as(host) }

@@ -1,5 +1,5 @@
 class Dev::UserSessionsController < ApplicationController
-  skip_before_action :require_login, only: %i[ login_as ]
+  skip_before_action :require_login, only: %i[login_as]
 
   def login_as
     game = Game.find(params[:game_id])

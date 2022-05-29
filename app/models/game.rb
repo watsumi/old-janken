@@ -18,7 +18,7 @@ class Game < ApplicationRecord
 
   validates :field_id, presence: true
 
-  scope :open, -> { joins(:users).where(users: {user_token_digest: [nil, '']}) }
+  scope :open, -> { joins(:users).where(users: { user_token_digest: [nil, ''] }) }
 
   after_update_commit do
     broadcast_replace_to self, target: self, partial: 'games/game_frame', locals: { game: self }
