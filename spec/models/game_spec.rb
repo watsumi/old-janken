@@ -154,6 +154,51 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe '#cpu_turn_activate!' do
+    subject { game3.cpu_turn_activate! }
+
+    let!(:game3) { create(:game) }
+    let!(:host3)  { create(:user, game: game3, role: :host) }
+    let!(:guest3) { create(:user, game: game3, role: :guest, user_token_digest: 'cpu_token') }
+    let!(:guest_hand) { create_list(:user_hand, 2, user: guest3) }
+    let!(:guest_support) { create(:user_support, user: guest3) }
+    let!(:game_details) do
+      create(:game_detail, game: game3, user: host3, hand_id: 1, turn: :host_turn1)
+      create(:game_detail, game: game3, user: guest3, hand_id: 2, turn: :guest_turn1)
+    end
+
+    context 'supportカードが使用されていないとき' do
+      it 'supportカードが使用されること' do
+        expect { subject }.to change { guest3.user_supports.size }.from(1).to(0)
+      end
+    end
+
+    it 'handカードが使用されること' do
+      expect { subject }.to change { guest3.user_hands.size }.by(-1)
+    end
+
+    context 'Roundが3以外のとき' do
+      it 'hostのターンになること' do
+        subject
+        expect(game3.game_details.last.host_turn?).to be_truthy
+      end
+    end
+
+    context 'Roundが3のとき' do
+      before do
+        create(:game_detail, game: game3, user: host3, hand_id: 1, turn: :host_turn2)
+        create(:game_detail, game: game3, user: host3, hand_id: 1, turn: :host_turn3)
+        create(:game_detail, game: game3, user: guest3, hand_id: 2, turn: :guest_turn2)
+        create(:game_detail, game: game3, user: guest3, hand_id: 2, turn: :guest_turn3)
+      end
+
+      it 'ゲームが終了すること' do
+        subject
+        expect(game3.game_details.last.finished?).to be_truthy
+      end
+    end
+  end
+
   describe '#game_judge!' do
     subject { game.game_judge! }
 

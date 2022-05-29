@@ -72,6 +72,12 @@ class Game < ApplicationRecord
     game_judge! if game_details.last.finished?
   end
 
+  def cpu_turn_activate!
+    apply_support_to_guest!(guest.user_supports.take) if guest.user_supports.present?
+    select_guest_hand!
+    turn_end!
+  end
+
   def round_judge!
     host_game_detail = game_details.where(user_id: host.id).second_to_last
     guest_game_detail = game_details.where(user_id: guest.id).last
@@ -136,5 +142,19 @@ class Game < ApplicationRecord
     else
       0
     end
+  end
+
+  def apply_support_to_guest!(user_support)
+    game_details.last.update!(support_id: user_support.support.id)
+    guest.update_by_support_card!(user_support.support.id)
+    user_support.destroy
+    notice = "guestが#{user_support.support.name}を使用しました"
+    notify_to_game(notice)
+  end
+
+  def select_guest_hand!
+    guest_hand = guest.user_hands.sample
+    game_details.last.update!(hand_id: guest_hand.hand.id)
+    guest_hand.destroy!
   end
 end

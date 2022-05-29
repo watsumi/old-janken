@@ -14,7 +14,7 @@ class CpuGamesController < ApplicationController
 
         if @game.create_game_and_set_user_cards!
           remember(host)
-          format.html { redirect_to @game }
+          format.html { redirect_to cpu_game_path(@game) }
           format.json { render :show, status: :ok, location: @game }
           @game.notify_to_game('ゲームを作成しました！')
         else
@@ -27,7 +27,7 @@ class CpuGamesController < ApplicationController
   # DELETE /games/1
   def destroy
     @game.destroy
-    redirect_to games_url
+    redirect_to root_path
   end
 
   private
