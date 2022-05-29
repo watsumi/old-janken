@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[authorize]
-  before_action :set_user, only: %i[show edit]
-  before_action :set_game, only: %i[show edit]
-
-  # GET /users/1
-  def show; end
+  before_action :set_user, only: %i[edit]
+  before_action :set_game, only: %i[edit]
 
   # GET /users/1/edit
   def edit

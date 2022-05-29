@@ -1,0 +1,19 @@
+- set_meta_tags title: 'ゲーム', noindex: true
+-# flash message
+= turbo_stream_from dom_id(@game, 'flashes')
+= turbo_frame_tag 'flash' do
+  = render 'flash'
+
+-# game
+= turbo_stream_from @game
+= render @game
+
+-# detail modal
+= turbo_stream_from dom_id(@game, 'detail')
+= turbo_frame_tag "detail_modal" do
+  = render 'detail_modal'
+
+-# finish modal
+= turbo_stream_from dom_id(@game, 'finish')
+= turbo_frame_tag "finish_modal" do
+  = render 'finish_modal'

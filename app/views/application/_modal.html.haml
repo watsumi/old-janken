@@ -9,6 +9,6 @@
         .modal-body.d-flex.justify-content-between
           %p.text-break.lh-lg.mx-3.w-50= card.description
           = image_tag card.card_image, class: "card mx-4"
-        - if is_my_turn?(@game.game_details.last) && card.type != 'character'
+        - if my_turn?(@game.game_details.last) && card.type != 'character'
           .modal-footer
             = yield

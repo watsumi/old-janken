@@ -1,5 +1,7 @@
 #home
   .card_left
     = link_to '新着ゲーム', games_path, class: 'btn btn-primary w-200', data: { turbo_frame: "fullscreen_modal" }
-  .card_right
+  .card_center
     = button_to 'リアルタイム対戦', games_path, method: :post, class: 'btn btn-primary w-200'
+  .card_right
+    = button_to 'CPU対戦', cpu_games_path, method: :post, class: 'btn btn-primary w-200'

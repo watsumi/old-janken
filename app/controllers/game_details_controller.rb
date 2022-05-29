@@ -3,16 +3,7 @@ class GameDetailsController < ApplicationController
   before_action :set_last_game_detail, only: %i[index]
 
   def index
-    if @last_game_detail.guest_turn_1? || @last_game_detail.host_turn_1?
-      limit = 0
-    elsif @last_game_detail.guest_turn_2? || @last_game_detail.host_turn_2?
-      limit = 2
-    elsif @last_game_detail.guest_turn_3? || @last_game_detail.host_turn_3?
-      limit = 4
-    elsif @last_game_detail.finished?
-      limit = 6
-    end
-    @game_details = GameDetail.where(game_id: @game.id).order(:created_at).limit(limit)
+    @game_details = GameDetail.where(game_id: @game.id).order(:created_at).limit(limit_size)
   end
 
   private
@@ -24,5 +15,17 @@ class GameDetailsController < ApplicationController
 
   def set_last_game_detail
     @last_game_detail = GameDetail.where(game_id: @game.id).order(:created_at).last
+  end
+
+  def limit_size
+    if @last_game_detail.guest_turn1? || @last_game_detail.host_turn1?
+      0
+    elsif @last_game_detail.guest_turn2? || @last_game_detail.host_turn2?
+      2
+    elsif @last_game_detail.guest_turn3? || @last_game_detail.host_turn3?
+      4
+    elsif @last_game_detail.finished?
+      6
+    end
   end
 end

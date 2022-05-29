@@ -18,7 +18,7 @@ class Game < ApplicationRecord
 
   validates :field_id, presence: true
 
-  scope :open, -> { joins(:users).where(users: {user_token_digest: [nil, '']}) }
+  scope :open, -> { joins(:users).where(users: { user_token_digest: [nil, ''] }) }
 
   after_update_commit do
     broadcast_replace_to self, target: self, partial: 'games/game_frame', locals: { game: self }
@@ -56,7 +56,7 @@ class Game < ApplicationRecord
 
     save
     set_user_cards!
-    game_details.create!(user_id: host.id, turn: :host_turn_1)
+    game_details.create!(user_id: host.id, turn: :host_turn1)
   end
 
   def turn_end!
@@ -72,12 +72,19 @@ class Game < ApplicationRecord
     game_judge! if game_details.last.finished?
   end
 
+  def cpu_turn_activate!
+    sleep rand(1.0...1.5) unless Rails.env.test?
+    apply_support_to_guest!(guest.user_supports.take) if guest.user_supports.present?
+    select_guest_hand!
+    turn_end!
+  end
+
   def round_judge!
     host_game_detail = game_details.where(user_id: host.id).second_to_last
     guest_game_detail = game_details.where(user_id: guest.id).last
 
-    calc_round_score(host_game_detail:, guest_game_detail:, role: :host)
-    calc_round_score(host_game_detail:, guest_game_detail:, role: :guest)
+    calc_round_score(host_game_detail:, guest_game_detail:)
+    calc_round_score(host_game_detail:, guest_game_detail:)
 
     host_game_detail.save!
     guest_game_detail.save!
@@ -98,13 +105,13 @@ class Game < ApplicationRecord
   def set_user_cards!
     users.each do |user|
       3.times do
-        user.set_hand!(user.character.name)
+        user.hand_create!(user.character.name)
       end
       user.set_support!
     end
   end
 
-  def calc_round_score(host_game_detail:, guest_game_detail:, role:)
+  def calc_round_score(host_game_detail:, guest_game_detail:)
     host_win_score = host.win_score
     guest_win_score = guest.win_score
     host_lose_score = host.lose_score
@@ -136,5 +143,19 @@ class Game < ApplicationRecord
     else
       0
     end
+  end
+
+  def apply_support_to_guest!(user_support)
+    game_details.last.update!(support_id: user_support.support.id)
+    guest.update_by_support_card!(user_support.support.id)
+    user_support.destroy
+    notice = "guestが#{user_support.support.name}を使用しました"
+    notify_to_game(notice)
+  end
+
+  def select_guest_hand!
+    guest_hand = guest.user_hands.sample
+    game_details.last.update!(hand_id: guest_hand.hand.id)
+    guest_hand.destroy!
   end
 end

@@ -42,13 +42,20 @@ Lint/AmbiguousBlockAssociation:
   # RSpecのchange { object.attribute }は許可する
   IgnoredMethods: [change]
 
-# 空のモデルスペックは許可する
 Lint/EmptyBlock:
   Exclude:
     - "spec/models/**/*"
 
 Metrics/AbcSize:
-  Max: 15
+  Max: 30
+  Exclude:
+    - "app/models/game.rb"
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 10
 
 Metrics/BlockLength:
   Exclude:
@@ -58,44 +65,34 @@ Metrics/BlockLength:
     - "config/environments/development.rb"
 
 Metrics/ClassLength:
-  Exclude:
-    - "app/forms/product_form.rb"
+  Max: 150
 
 # メソッドの行数を20行までにする
 Metrics/MethodLength:
   CountComments: false
   Max: 20
-
-# コントローラのみメソッド名に「set_」「get_」を許可
-Naming/AccessorMethodName:
   Exclude:
-    - "app/controllers/**/*"
+    - "app/helpers/application_helper.rb"
 
 Rails/HasManyOrHasOneDependent:
   Exclude:
     - "app/models/character.rb"
 
-# Prefer &&/|| over and/or.
 Style/AndOr:
   Enabled: true
 
-# 日本語でのコメントを許可
 Style/AsciiComments:
   Enabled: false
 
-# Admin::BaseControllerのような書き方を許可
 Style/ClassAndModuleChildren:
   Enabled: false
 
-# クラスにコメントを残さない
 Style/Documentation:
   Enabled: false
 
-# frozen_string_literal: trueはなくていい
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# each_key, value, transform_keys, valueを使用する
 Style/HashEachMethods:
   Enabled: true
 Style/HashTransformKeys:
@@ -103,8 +100,6 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
-# 複数行の最後にカンマを付ける
-# 行の追加時にdiffが出ないようにするため
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 

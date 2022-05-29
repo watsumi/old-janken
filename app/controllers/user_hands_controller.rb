@@ -15,20 +15,22 @@ class UserHandsController < ApplicationController
   end
 
   def destroy
-    turn_change!
     @user_hand.destroy
-    notice = if @game.game_details.last.finished?
-               "ゲーム終了！#{@game.winner_role}"
-             else
-               "#{@game.game_details.last.user.role}のターンです"
-             end
-
-    respond_to do |format|
-      format.turbo_stream {}
-      format.html { redirect_to @user_hand, notice: }
+    if params[:cpu_game] == 'true'
+      cpu_turn_change!
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to cpu_game_path(@game), notice: notice_next_turn }
+      end
+    else
+      turn_change!
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to game_path(@game), notice: notice_next_turn }
+      end
     end
 
-    @game.notify_to_game(notice)
+    @game.notify_to_game(notice_next_turn)
   end
 
   private
@@ -44,5 +46,19 @@ class UserHandsController < ApplicationController
   def turn_change!
     @game.game_details.last.update!(hand_id: @user_hand.hand.id)
     @game.turn_end!
+  end
+
+  def cpu_turn_change!
+    @game.game_details.last.update!(hand_id: @user_hand.hand.id)
+    @game.turn_end!
+    @game.cpu_turn_activate!
+  end
+
+  def notice_next_turn
+    if @game.game_details.last.finished?
+      "ゲーム終了！#{@game.winner_role}"
+    else
+      "#{@game.game_details.last.user.role}のターンです"
+    end
   end
 end

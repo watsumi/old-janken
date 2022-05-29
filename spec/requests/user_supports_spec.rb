@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'UserHands', type: :request do
+RSpec.describe 'UserSupports', type: :request do
   let(:game) { create(:game) }
   let(:host)  { create(:user, game:, role: :host) }
   let(:guest) { create(:user, game:, role: :guest) }
@@ -15,23 +15,16 @@ RSpec.describe 'UserHands', type: :request do
 
   before { login_as(host) }
 
-  describe 'GET /show/:id' do
-    it 'renders a successful response' do
-      get user_hand_path(host_hand, game_id: game.id)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /edit/:id/edit' do
     it 'renders a successful response' do
-      get edit_user_hand_path(host_hand, game_id: game.id)
+      get edit_user_support_path(host_support, game_id: game.id)
       expect(response).to be_successful
     end
   end
 
-  describe 'DELETE /user_hand_path/:id' do
+  describe 'DELETE /user_support_path/:id' do
     it 'renders a successful response' do
-      delete user_hand_path(host_hand, game_id: game.id)
+      delete user_support_path(host_support, game_id: game.id)
       expect(response).to redirect_to(game_path(game))
     end
   end

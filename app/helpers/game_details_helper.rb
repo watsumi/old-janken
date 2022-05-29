@@ -1,5 +1,5 @@
 module GameDetailsHelper
-  def is_my_turn?(game_detail)
+  def my_turn?(game_detail)
     if current_user&.host_role?
       game_detail.host_turn?
     elsif current_user&.guest_role?

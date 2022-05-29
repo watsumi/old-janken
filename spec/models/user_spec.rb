@@ -22,12 +22,12 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:game) { create(:game) }
-  let(:user_1) do
+  let(:user1) do
     create(:user, game:,
                   role: :host,
                   character_id: 1)
   end
-  let(:user_2) do
+  let(:user2) do
     create(:user, game:,
                   role: :guest,
                   character_id: 1)
@@ -77,14 +77,14 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#set_hand!' do
+  describe '#hand_create!' do
     let!(:user) do
       create(:user, game:,
                     role: :host,
                     character_id: character.id)
     end
 
-    subject { user.set_hand!(character.name) }
+    subject { user.hand_create!(character.name) }
 
     context 'ヒポグリフのとき' do
       let(:character) { hippogriff }
@@ -110,20 +110,20 @@ RSpec.describe User, type: :model do
   end
 
   describe '#set_support!' do
-    subject { user_1.set_support! }
+    subject { user1.set_support! }
 
     it 'サポートカードが紐づくこと' do
       subject
-      expect(user_1.user_supports.take.support_id).to eq(1).or eq(2).or eq(3)
+      expect(user1.user_supports.take.support_id).to eq(1).or eq(2).or eq(3)
     end
   end
 
   describe '#update_by_support_card!(support_card_id)' do
-    subject { user_1.update_by_support_card!(support_card_id) }
+    subject { user1.update_by_support_card!(support_card_id) }
 
     before do
-      create_list(:user_hand, 3, user: user_1, hand_id: 1)
-      create_list(:user_hand, 3, user: user_2, hand_id: 2)
+      create_list(:user_hand, 3, user: user1, hand_id: 1)
+      create_list(:user_hand, 3, user: user2, hand_id: 2)
     end
 
     context 'support_card が 幸運の妖精チリムとチェリム のとき' do
@@ -131,15 +131,17 @@ RSpec.describe User, type: :model do
 
       it '自分の手札が一枚更新されること' do
         subject
-        expect(UserHand.where(user_id: user_1.id).pluck(:hand_id)).to eq([1, 1, 2]) | eq([1, 1, 3])
+        expect(UserHand.where(user_id: user1.id).pluck(:hand_id).sort).to eq([1, 1, 2]) | eq([1, 1, 3])
+        expect(UserHand.where(user_id: user2.id).pluck(:hand_id)).to eq([2, 2, 2])
       end
     end
-    context 'support_card が 幸運の妖精チリムとチェリム のとき' do
+    context 'support_card が マダガルザウルス のとき' do
       let(:support_card_id) { 2 }
 
-      it '自分の手札が一枚更新されること' do
+      it '自分の手札が一枚相手の手札と入れ替わること' do
         subject
-        expect(UserHand.where(user_id: user_1.id).pluck(:hand_id)).to eq([1, 1, 2])
+        expect(UserHand.where(user_id: user1.id).pluck(:hand_id).sort).to eq([1, 1, 2])
+        expect(UserHand.where(user_id: user2.id).pluck(:hand_id).sort).to eq([1, 2, 2])
       end
     end
     # FIXME: 何かをテストしてるようで何もテストしていない
@@ -148,13 +150,13 @@ RSpec.describe User, type: :model do
 
       it 'ゲームのフィールドが更新されること' do
         subject
-        expect(user_1.game.field_id).to eq(1) | eq(2) | eq(3) | eq(4) | eq(5) | eq(6) | eq(7) | eq(8) | eq(9)
+        expect(user1.game.field_id).to eq(1) | eq(2) | eq(3) | eq(4) | eq(5) | eq(6) | eq(7) | eq(8) | eq(9)
       end
     end
   end
 
   describe '#win?(user_hand:, enemy_hand:)' do
-    subject { user_1.win?(user_hand:, enemy_hand:) }
+    subject { user1.win?(user_hand:, enemy_hand:) }
     context 'userがグーの場合' do
       let(:user_hand) { 1 }
       context 'enemyがグーのとき' do
