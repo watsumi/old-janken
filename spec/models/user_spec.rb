@@ -131,15 +131,17 @@ RSpec.describe User, type: :model do
 
       it '自分の手札が一枚更新されること' do
         subject
-        expect(UserHand.where(user_id: user1.id).pluck(:hand_id)).to eq([1, 1, 2]) | eq([1, 1, 3])
+        expect(UserHand.where(user_id: user1.id).pluck(:hand_id).sort).to eq([1, 1, 2]) | eq([1, 1, 3])
+        expect(UserHand.where(user_id: user2.id).pluck(:hand_id)).to eq([2, 2, 2])
       end
     end
-    context 'support_card が 幸運の妖精チリムとチェリム のとき' do
+    context 'support_card が マダガルザウルス のとき' do
       let(:support_card_id) { 2 }
 
-      it '自分の手札が一枚更新されること' do
+      it '自分の手札が一枚相手の手札と入れ替わること' do
         subject
-        expect(UserHand.where(user_id: user1.id).pluck(:hand_id)).to eq([1, 1, 2])
+        expect(UserHand.where(user_id: user1.id).pluck(:hand_id).sort).to eq([1, 1, 2])
+        expect(UserHand.where(user_id: user2.id).pluck(:hand_id).sort).to eq([1, 2, 2])
       end
     end
     # FIXME: 何かをテストしてるようで何もテストしていない
