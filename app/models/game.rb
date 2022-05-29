@@ -56,7 +56,7 @@ class Game < ApplicationRecord
 
     save
     set_user_cards!
-    game_details.create!(user_id: host.id, turn: :host_turn_1)
+    game_details.create!(user_id: host.id, turn: :host_turn1)
   end
 
   def turn_end!
@@ -76,8 +76,8 @@ class Game < ApplicationRecord
     host_game_detail = game_details.where(user_id: host.id).second_to_last
     guest_game_detail = game_details.where(user_id: guest.id).last
 
-    calc_round_score(host_game_detail:, guest_game_detail:, role: :host)
-    calc_round_score(host_game_detail:, guest_game_detail:, role: :guest)
+    calc_round_score(host_game_detail:, guest_game_detail:)
+    calc_round_score(host_game_detail:, guest_game_detail:)
 
     host_game_detail.save!
     guest_game_detail.save!
@@ -98,13 +98,13 @@ class Game < ApplicationRecord
   def set_user_cards!
     users.each do |user|
       3.times do
-        user.set_hand!(user.character.name)
+        user.hand_create!(user.character.name)
       end
       user.set_support!
     end
   end
 
-  def calc_round_score(host_game_detail:, guest_game_detail:, role:)
+  def calc_round_score(host_game_detail:, guest_game_detail:)
     host_win_score = host.win_score
     guest_win_score = guest.win_score
     host_lose_score = host.lose_score

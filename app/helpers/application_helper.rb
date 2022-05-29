@@ -33,8 +33,10 @@ module ApplicationHelper
     }
   end
 
-  def is_game_detail_page?
-    !(current_page?(root_path) || current_page?(rules_path) || current_page?(terms_path) || current_page?(credits_path) || current_page?(privacy_policy_path) || current_page?(games_path))
+  def game_detail_page?
+    %w[root rules terms credits privacy_policy games].any? do |name|
+      !current_page?(send("#{name}_path"))
+    end
   end
 
   def icon(icon_name)

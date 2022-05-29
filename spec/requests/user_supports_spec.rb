@@ -8,9 +8,9 @@ RSpec.describe 'UserSupports', type: :request do
   let!(:host_hand) { create(:user_hand, user: host) }
   let!(:guest_hand) { create(:user_hand, user: guest) }
   let!(:game_details) do
-    create(:game_detail, game:, user: host, hand_id: 1, turn: :host_turn_1)
-    create(:game_detail, game:, user: guest, hand_id: 2, turn: :guest_turn_1)
-    create(:game_detail, game:, user: host, hand_id: 1, turn: :host_turn_2)
+    create(:game_detail, game:, user: host, hand_id: 1, turn: :host_turn1)
+    create(:game_detail, game:, user: guest, hand_id: 2, turn: :guest_turn1)
+    create(:game_detail, game:, user: host, hand_id: 1, turn: :host_turn2)
   end
 
   before { login_as(host) }

@@ -7,7 +7,9 @@ RSpec.describe '/games', type: :request do
   let!(:host_game_detail) { create_list(:game_detail, 3, game:, user: host) }
   let!(:guest_game_detail) { create_list(:game_detail, 3, game:, user: guest) }
 
-  before { login_as(host) }
+  before do
+    login_as(host)
+  end
 
   describe 'GET /index' do
     it 'renders a successful response' do

@@ -25,7 +25,7 @@ class UserHandsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream {}
-      format.html { redirect_to @user_hand, notice: }
+      format.html { redirect_to game_path(@game), notice: }
     end
 
     @game.notify_to_game(notice)

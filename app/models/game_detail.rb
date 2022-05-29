@@ -31,21 +31,21 @@ class GameDetail < ApplicationRecord
   belongs_to_active_hash :support, class_name: 'Support', inverse_of: :game_details
 
   enum turn: {
-    host_turn_1: 1,
-    guest_turn_1: 2,
-    host_turn_2: 3,
-    guest_turn_2: 4,
-    host_turn_3: 5,
-    guest_turn_3: 6,
+    host_turn1: 1,
+    guest_turn1: 2,
+    host_turn2: 3,
+    guest_turn2: 4,
+    host_turn3: 5,
+    guest_turn3: 6,
     finished: 7,
   }
 
   def host_turn?
-    turn.match(/host_turn_\d/)
+    turn.match(/host_turn\d/)
   end
 
   def guest_turn?
-    turn.match(/guest_turn_\d/)
+    turn.match(/guest_turn\d/)
   end
 
   def round_num

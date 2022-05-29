@@ -1,22 +1,15 @@
-class GamesController < ApplicationController
-  skip_before_action :require_login, only: %i[index create paticipates]
-  before_action :set_game, only: %i[show destroy paticipates]
+class CpuGamesController < ApplicationController
+  skip_before_action :require_login, only: %i[create]
+  before_action :set_game, only: %i[show destroy]
 
-  # GET /games
-  def index
-    @games = Game.open.limit(15)
-  end
-
-  # GET /games/1
   def show; end
 
-  # POST /games
   def create
     Game.transaction do
       respond_to do |format|
         @game = Game.new(field: Field.all.sample)
         host = @game.users.build(role: :host, character: Character.all.sample)
-        @game.users.build(role: :guest, character: Character.all.sample)
+        @game.users.build(role: :guest, character: Character.all.sample, user_token_digest: 'cpu_token')
         host.set_user_token
 
         if @game.create_game_and_set_user_cards!
@@ -36,8 +29,6 @@ class GamesController < ApplicationController
     @game.destroy
     redirect_to games_url
   end
-
-  def paticipates; end
 
   private
 

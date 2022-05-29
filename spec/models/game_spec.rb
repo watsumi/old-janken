@@ -84,14 +84,14 @@ RSpec.describe Game, type: :model do
   end
 
   describe '#create_game_and_set_user_cards!' do
-    let!(:game_1) { build(:game) }
+    let!(:game1) { build(:game) }
 
-    subject { game_1.create_game_and_set_user_cards! }
+    subject { game1.create_game_and_set_user_cards! }
 
     context '正常系' do
       before do
-        @host_user = game_1.users.build(role: :host, character_id: 1)
-        @guest_user = game_1.users.build(role: :guest, character_id: 1)
+        @host_user = game1.users.build(role: :host, character_id: 1)
+        @guest_user = game1.users.build(role: :guest, character_id: 1)
       end
 
       it 'userに手札がセットされ、game_detailが1件作成されること' do
@@ -99,38 +99,38 @@ RSpec.describe Game, type: :model do
           expect do
             expect { subject }.to change { @host_user.user_hands.size }.from(0).to(3)
           end.to change { @guest_user.user_hands.size }.from(0).to(3)
-        end.to change { game_1.game_details.size }.from(0).to(1)
+        end.to change { game1.game_details.size }.from(0).to(1)
       end
     end
   end
 
   describe '#turn_end!' do
-    subject { game_2.turn_end! }
+    subject { game2.turn_end! }
 
-    let!(:game_2)  { create(:game) }
-    let!(:host_2)  { create(:user, game: game_2, role: :host) }
-    let!(:guest_2) { create(:user, game: game_2, role: :guest) }
+    let!(:game2) { create(:game) }
+    let!(:host2)  { create(:user, game: game2, role: :host) }
+    let!(:guest2) { create(:user, game: game2, role: :guest) }
     let!(:game_details) do
-      create(:game_detail, game: game_2, user: host_2, hand_id: 1, turn: :host_turn_1)
-      create(:game_detail, game: game_2, user: guest_2, hand_id: 2, turn: :guest_turn_1)
-      create(:game_detail, game: game_2, user: host_2, hand_id: 1, turn: :host_turn_2)
+      create(:game_detail, game: game2, user: host2, hand_id: 1, turn: :host_turn1)
+      create(:game_detail, game: game2, user: guest2, hand_id: 2, turn: :guest_turn1)
+      create(:game_detail, game: game2, user: host2, hand_id: 1, turn: :host_turn2)
     end
 
     context 'ゲームが終了していないとき' do
       context 'hostのターンのとき' do
         it 'game_detailが1件新たに作成されること' do
-          expect { subject }.to change { game_2.game_details.size }.by(1)
+          expect { subject }.to change { game2.game_details.size }.by(1)
         end
       end
       context 'guestのターンのとき' do
         before do
-          create(:game_detail, game: game_2, user: guest_2, hand_id: 2, turn: :guest_turn_2)
+          create(:game_detail, game: game2, user: guest2, hand_id: 2, turn: :guest_turn2)
         end
         it 'game_detailが1件新たに作成され、round_scoreが更新されること' do
           subject
 
-          host_round_score = game_2.game_details.third_to_last.round_score
-          guest_round_score = game_2.game_details.second_to_last.round_score
+          host_round_score = game2.game_details.third_to_last.round_score
+          guest_round_score = game2.game_details.second_to_last.round_score
 
           expect(host_round_score).to eq(-1)
           expect(guest_round_score).to eq(2)
@@ -140,16 +140,16 @@ RSpec.describe Game, type: :model do
 
     context 'gameが終了しているとき' do
       before do
-        allow(game_2).to receive(:game_judge!).and_return(true)
+        allow(game2).to receive(:game_judge!).and_return(true)
 
-        create(:game_detail, game: game_2, user: guest_2, hand_id: 2, turn: :guest_turn_2)
-        create(:game_detail, game: game_2, user: host_2, hand_id: 2, turn: :host_turn_3)
-        create(:game_detail, game: game_2, user: guest_2, hand_id: 2, turn: :guest_turn_3)
+        create(:game_detail, game: game2, user: guest2, hand_id: 2, turn: :guest_turn2)
+        create(:game_detail, game: game2, user: host2, hand_id: 2, turn: :host_turn3)
+        create(:game_detail, game: game2, user: guest2, hand_id: 2, turn: :guest_turn3)
       end
 
       it '#game_judge!メソッドが呼ばれること' do
         subject
-        expect(game_2).to have_received(:game_judge!).once
+        expect(game2).to have_received(:game_judge!).once
       end
     end
   end

@@ -1,5 +1,5 @@
 module UsersHelper
-  def is_enemy?(user)
+  def enemy?(user)
     if current_user&.host_role?
       user.guest_role?
     elsif current_user&.guest_role?

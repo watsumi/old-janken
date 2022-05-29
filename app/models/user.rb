@@ -48,7 +48,7 @@ class User < ApplicationRecord
 
   def taken? = user_token_digest.present?
 
-  def set_hand!(character)
+  def hand_create!(character)
     case character
     when 'ヒポグリフ'
       user_hands.create!(hand_id: [1, 3].sample)
@@ -72,30 +72,18 @@ class User < ApplicationRecord
   def update_by_support_card!(support_card_id)
     user_hand = user_hands.sample
     enemy_hand = enemy.user_hands.sample
-    user_hand_marshal = Marshal.load(Marshal.dump(user_hand)) # 破壊的変更があった場合にも、独立して値を保持できる
+    # 破壊的変更があった場合にも、独立して値を保持する
+    user_hand_marshal = Marshal.load(Marshal.dump(user_hand))
     enemy_hand_marshal = Marshal.load(Marshal.dump(enemy_hand))
 
-    case support_card_id.to_i
-    when 1
-      hand_ids = Hand.all.pluck(:id)
-      hand_ids.delete(user_hand_marshal.hand_id.to_i)
-      UserHand.find(user_hand_marshal.id).update!(hand_id: hand_ids.sample)
-    when 2
-      UserHand.find(user_hand_marshal.id).update!(hand_id: enemy_hand_marshal.hand_id)
-      UserHand.find(enemy_hand_marshal.id).update!(hand_id: user_hand_marshal.hand_id)
-    when 3
-      game.update!(field: Field.all.sample)
-    end
+    effect_activate!(support_card_id, user_hand_marshal, enemy_hand_marshal)
   end
 
   def win?(user_hand:, enemy_hand:)
-    if user_hand == 1 && enemy_hand == 3
-      true
-    elsif user_hand == 2 && enemy_hand == 1
-      true
-    else
-      user_hand == 3 && enemy_hand == 2
-    end
+    hands = { user_hand:, enemy_hand: }
+    [{ user_hand: 1,
+       enemy_hand: 3 }, { user_hand: 2,
+                          enemy_hand: 1 }, { user_hand: 3, enemy_hand: 2 }].include?(hands)
   end
 
   def win_score
@@ -133,5 +121,19 @@ class User < ApplicationRecord
   def generate_user_token_digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost:)
+  end
+
+  def effect_activate!(support_card_id, user_hand_marshal, enemy_hand_marshal)
+    case support_card_id.to_i
+    when 1
+      hand_ids = Hand.all.pluck(:id)
+      hand_ids.delete(user_hand_marshal.hand_id.to_i)
+      UserHand.find(user_hand_marshal.id).update!(hand_id: hand_ids.sample)
+    when 2
+      UserHand.find(user_hand_marshal.id).update!(hand_id: enemy_hand_marshal.hand_id)
+      UserHand.find(enemy_hand_marshal.id).update!(hand_id: user_hand_marshal.hand_id)
+    when 3
+      game.update!(field: Field.all.sample)
+    end
   end
 end
