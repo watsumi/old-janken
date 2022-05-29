@@ -19,4 +19,22 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe '#cpu_game?(game)' do
+    let(:game) { create(:game) }
+
+    context '正常系' do
+      let!(:guest) { create(:user, game:, role: :guest, user_token_digest: 'cpu_token') }
+      it 'cpu_gameのときtrueが返ること' do
+        expect(cpu_game?(game)).to be_truthy
+      end
+    end
+
+    context '正常系' do
+      let!(:guest) { create(:user, game:, role: :guest, user_token_digest: 'user_token') }
+      it 'cpu_gameでないときfalseが返ること' do
+        expect(cpu_game?(game)).to be_falsey
+      end
+    end
+  end
 end

@@ -17,11 +17,18 @@ RSpec.describe '/games', type: :request do
       expect(response).to be_successful
     end
   end
+
   describe 'GET /show' do
     let(:game) { create(:game) }
     it 'renders a successful response' do
       get game_url(game)
       expect(response).to be_successful
+    end
+  end
+
+  describe 'POST /create' do
+    it 'creates a new cpu_game' do
+      expect { post games_url }.to change(Game, :count).by(1)
     end
   end
 end

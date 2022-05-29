@@ -39,6 +39,10 @@ module ApplicationHelper
     end
   end
 
+  def cpu_game?(game)
+    game.guest.user_token_digest == 'cpu_token'
+  end
+
   def icon(icon_name)
     tag.i(class: ['bi', "bi-#{icon_name}"])
   end

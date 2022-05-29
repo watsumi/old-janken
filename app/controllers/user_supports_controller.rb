@@ -10,7 +10,7 @@ class UserSupportsController < ApplicationController
     @user_support.destroy
     notice = "#{@user_support.user.role}が#{@user_support.support.name}を使用しました"
     respond_to do |format|
-      format.turbo_stream {}
+      format.turbo_stream
       format.html { redirect_to game_path(@game), notice: }
     end
 

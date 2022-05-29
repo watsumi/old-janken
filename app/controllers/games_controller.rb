@@ -34,7 +34,7 @@ class GamesController < ApplicationController
   # DELETE /games/1
   def destroy
     @game.destroy
-    redirect_to games_url
+    redirect_to root_path
   end
 
   def paticipates; end
