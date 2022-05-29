@@ -16,4 +16,6 @@ Rails.application.routes.draw do
     end
     resources :game_details, only: %i[index]
   end
+
+  get '/login_as/:user_id', to: 'dev/user_sessions#login_as' unless Rails.env.production?
 end
