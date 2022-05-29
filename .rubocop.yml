@@ -45,8 +45,6 @@ Lint/AmbiguousBlockAssociation:
 Lint/EmptyBlock:
   Exclude:
     - "spec/models/**/*"
-    - "app/controllers/user_hands_controller.rb"
-    - "app/controllers/user_supports_controller.rb"
 
 Metrics/AbcSize:
   Max: 30
