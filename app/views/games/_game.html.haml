@@ -11,3 +11,6 @@
           = render 'users/user', game: game, user: @host
         .d-flex.flex-row.justify-content-center.mt-5
           = render 'users/user', game: game, user: @guest
+
+- if current_user.host_role? && !game.guest.taken?
+  = render 'paticipates'
