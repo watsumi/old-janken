@@ -16,6 +16,9 @@ test:
 
 production:
   <<: *default
-  database: old_janken_production
-  username: old_janken_production_user
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
+  host: <%= ENV['HOSTNAME'] %>
+  port: <%= ENV['PORT'] %>
+  pool: <%= ENV['MAX_CONNECTION_POOL'] || 5 %>

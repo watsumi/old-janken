@@ -10,8 +10,8 @@ default: &default
 development: &development
   <<: *default
   database: old_janken_development
-  username: utsumiwataru
-  password:
+  username: pguser
+  password: passwor
 
 test:
   <<: *default
@@ -21,6 +21,6 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['DATABASE_NAME'] %>
-  username: <%= ENV['DATABASE_UERNAME'] %>
+  database: old_janken_production
+  username: old_janken_production_user
   password: <%= ENV['DATABASE_PASSWORD'] %>
