@@ -1,5 +1,5 @@
 # 旧約じゃんけん
-[旧約じゃんけん](https://old-janken.com/)
+[旧約じゃんけん](https://old-janken.onrender.com/)
 
 ## ER図
 ```mermaid
