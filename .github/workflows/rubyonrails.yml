@@ -67,8 +67,6 @@ jobs:
         run: bundle install --path=vendor/bundle --jobs 4 --retry 3
       - name: Yarn install
         run: bundle exec rails yarn:install
-      - name: Set database.yml
-        run: cp -v config/database.example.yml config/database.yml
       - name: db create
         run: bundle exec rails db:create db:schema:load --trace
       - name: assets:precompile
