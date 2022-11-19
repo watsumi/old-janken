@@ -5,14 +5,16 @@ databases:
     region: singapore
 
 services:
- - type: redis
-   name: old_janken_production
-   ipAllowList: []
-   plan: free
-   maxmemoryPolicy: allkeys-lfu
+  - type: redis
+    name: old_janken_production
+    ipAllowList: []
+    plan: free
+    maxmemoryPolicy: allkeys-lfu
   - type: web
     name: old-janken
     env: ruby
+    region: singapore
+    plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
