@@ -7,8 +7,9 @@ default: &default
 development: &development
   <<: *default
   database: old_janken_development
-  username: pguser
-  password: passwor
+  username: utsumiwataru
+  password:
+  host: localhost
 
 test:
   <<: *default
